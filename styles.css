@@ -1,0 +1,95 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700|Merriweather:400,300,400italic,700|Open+Sans:300);
+
+body {
+
+}
+h1, h2, h3{
+	font-family: 'Montserrat';
+	color:#000623;
+	text-align: center;
+	font-weight: 700;
+}
+p {
+	font-family: 'Merriweather';
+}
+
+a {
+	font-family: 'Montserrat';
+	font-weight: 700;
+	
+}
+
+.subtitle {
+	
+	font-family:'Open Sans', sans-serif;
+	color:#555;
+	text-align: center;
+}
+
+.header {
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: 400;
+}
+/* This is just kinda ugly and doesn't really work.
+@media (min-width: 600px){
+	.section{
+		border-left:thin solid;
+	}
+}
+
+*/
+
+.resumeresume {
+	text-align: center;
+	font-size:1.3em;
+
+}
+.about{
+	
+	margin-left:30%;
+	margin-right:30%;
+}
+
+.job {
+	text-align: center;
+	padding-bottom: 5em;
+}
+
+.title {
+	font-family: 'Montserrat';
+	font-size: 1.6em;
+	font-weight: 700;
+}
+
+.description{
+	text-align:left;
+	margin-left:20%;
+	margin-right:20%;
+}
+
+
+.skill {
+	text-align: center;
+}
+
+.school {
+	text-align: center;
+}
+
+
+.heading h2{
+	font-size:3em;
+}
+
+.buttons{
+
+	text-align: center;
+	font-size: 1.3em;
+}
+strong{
+
+	font-family: "Montserrat";
+	font-weight: 700;
+
+}
