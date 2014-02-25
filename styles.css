@@ -85,9 +85,9 @@ hr {
 	
 	/* */
 	box-shadow: 0px 0px 5px 1px #ccc; 
-	margin: 2em .5em;
+	margin: 2em 0em;
 	
-	padding: 2em 2em; 
+	padding: 2em 1.3em; 
 	
 }
 
