@@ -85,8 +85,10 @@ hr {
 	
 	/* */
 	box-shadow: 0px 0px 5px 1px #ccc; 
-	margin: 2em;
-	padding: 2em; 
+	margin: 2em .5em;
+	
+	padding: 2em 2em; 
+	
 }
 
 .title {
