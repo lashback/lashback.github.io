@@ -19,6 +19,17 @@ a {
 	
 }
 
+.me {
+width: 100px;
+height: 100px;
+-webkit-border-radius: 100%;
+-moz-border-radius: 100%;
+border-radius: 100%;
+box-shadow: 5px 5px 5px -1px #ccc; 
+display:block;
+margin:auto;
+margin-bottom: 10px;
+}
 .subtitle {
 	
 	font-family:'Open Sans', sans-serif;
@@ -40,6 +51,9 @@ a {
 
 */
 
+hr {
+	border-color: #ccc;
+}
 .top {
 	margin-top: 50px;
 	margin-bottom: -10px;
@@ -113,9 +127,21 @@ strong{
 	font-weight: 700;
 
 }
-
+.divider{
+	border-color: #CCC;
+	border-width: 1px;
+}
 
 
 .headerthing{
-	width:70px;
+	
+	width:50%;
 }
+/*
+.section-head {
+	border-top:thin solid;
+	border-bottom: thin solid;
+	border-color: #CCC;
+
+}
+*/
