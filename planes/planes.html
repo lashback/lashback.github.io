@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Aircraft Disappearances</title>
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+	body {
+		  font-family: 'Montserrat', sans-serif;
+		  font-size: 1em;
+	}
+
+	.axis path,
+	.axis line {
+		fill: none;
+		stroke: grey;
+		shape-rendering: crispEdges;
+	}
+
+	.dot {
+		stroke: #0F8C79;
+		fill: #6BBBA1;
+	}
+
+	.focused {
+		stroke
+	}
+	.grid .tick {
+		stroke: lightgrey;
+		opacity: 0.7;
+	}
+	.grid path {
+		stroke-width: 0;
+	}
+
+	.tooltip {
+		position: absolute;
+		text-align: center;
+		width:300px;
+		
+		
+	}
+	.date{
+		
+	}
+	.missing{
+		font-weight: 700;
+		font-size: 1.5em;
+	}
+	.credit{
+		font-size: .6em;
+	}
+	</style>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
+<div class='credit'>
+<p>By <a href='https://twitter.com/Nat_Lash'>Nathaniel Lash</a></p>
+<p><strong>Source: </strong><a href="http://en.wikipedia.org/wiki/List_of_aerial_disappearances">Wikipedia's List of Aerial Disappearances</a></p>
+<p style='color:#666'>Inspired by and repurposed from <a href='http://bl.ocks.org/d3noob'>d3noob</a>'s <a href="http://bl.ocks.org/d3noob/4425979">New Zealand Earthquakes</a></p>
+</div>
+	<script>
+
+var pageWidth = window.innerWidth;
+
+var margin = {top: 100, right: 100, bottom: 100, left: 100},
+    width = pageWidth - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+	parsetimeFormat = d3.time.format("%Y-%m-%d").parse;
+
+
+var formattime = d3.time.format("%Y-%m-%d");	
+
+var x = d3.time.scale().range([0, width]);
+var y = d3.time.scale().range([0, height]);
+
+
+var xAxis = d3.svg.axis()
+	.scale(x)
+	.orient("bottom")
+	.ticks(15)
+	.tickFormat(d3.time.format("%Y"));	
+
+var svg = d3.select("body")
+	.append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+	.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// State the functions for the grid
+function make_x_axis() {
+  return d3.svg.axis()
+      .scale(x)
+      .orient("bottom")
+      .ticks(15)
+}
+
+// Get the data
+d3.csv("disappearances.csv", function(error, data) {
+  data.forEach(function(d) {
+	d.moment = parsetimeFormat(d.dateClean);
+  });
+
+	// Set the domains
+	x.domain([new Date(1900, 01, 01, 0, 0, 0), new Date(2014, 11, 31, 0, 0, 0)]);
+  
+// y.domain(d3.extent(data, function(d) { return d.week_year; }));
+
+	// tickSize: Get or set the size of major, minor and end ticks
+	svg.append("g").classed("grid x_grid", true)
+		.attr("transform", "translate(0," + height + ")")
+		.style("stroke-dasharray", ("3, 3, 3"))
+		.call(make_x_axis()
+			.tickSize(-height, 0, 0)
+			.tickFormat("")
+		)
+
+	// Draw the Axes and the tick labels
+	svg.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0," + height + ")")
+		.call(xAxis)
+	.selectAll("text")
+		.attr("dx", 35)
+		.attr("dy", 5)
+		.style("text-anchor", "middle");
+
+
+	// Tooltip stuff
+	var div = d3.select("body").append("div")
+		.attr("class", "tooltip")
+		.style("opacity", 1e-6);
+
+	// draw the plotted circles
+	svg.selectAll(".dot")
+		.data(data)
+	.enter().append("circle")
+		.attr("class", "dot")
+		.attr("r", function(d) { return ((d.totalMissing/5)+2); })
+		.style("opacity", 0.4)
+		.attr("cx", function(d) { return x(d.moment); })
+	// Tooltip stuff after this
+	    .on("mouseover", function(d) {
+	    	
+			div.transition()
+				.duration(200)
+				.style("opacity", .7);
+			div	.html("<div class='tooltip'>"+ 
+				"<span class=missing>"+ d.totalMissing+"</span><br> people missing"+
+				"<br><br/><strong>Date: </strong><span class='date'>" +
+					(d.dateClean) + "</span>" + 
+					"<br/>" + "<span class='context'><strong>Context:</strong>" + d.context + "</span></div>"
+
+					)	
+				.style("left",  d3.select(this).attr("cx") + "px")
+				.style("top", 300 + "px");
+			})	
+		.on("mouseout", function(d) {
+			
+			div.transition()
+				.duration(500)
+				.style("opacity", 1e-6);
+		});	
+
+	// Add the title
+	svg.append("text")
+		.attr("x", (width / 2))				
+		.attr("y", 0 - (margin.top / 2))	
+		.attr("text-anchor", "middle")		
+		.style("font-size", "40px") 		
+		.text("Aerial Disappearances");	
+
+});
+
+</script>
+
+
+</body>
+</html>
