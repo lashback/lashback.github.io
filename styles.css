@@ -82,7 +82,7 @@ hr {
 }
 
 .job {
-	
+	text-align: center;
 	/* */
 	box-shadow: 0px 0px 5px 1px #ccc; 
 	margin: 2em 0em;
@@ -92,7 +92,7 @@ hr {
 }
 
 .project {
-	text-align: center;
+
 	
 	/* */
 	box-shadow: 0px 0px 5px 1px #ccc; 
