@@ -23,22 +23,93 @@
 	<p class='subtitle'>the future is now come on let's go it's leaving without us</p>
 	
 	<hr class='divider'>
-	<h2>Projects</h2>
+	<h2>Clips and projects</h2>
 	<hr class='divider'>
 	<div class='about'>
 		<div class='project'>
 			<h3>Salary Guide</h3>
 			<a href='http://salaryguide.dailyillini.com/' target='_blank'><img class='sample' src='salaryguide.png'/></a>
 			<p class='more'>See more</p>
-			<p class='more_info'>Salary Guide visualizes and contextualizes information about the salaries of public state employees at the University of Illinois. <a href='https://medium.com/p/fdf75b8086fd'>Click here</a> to read more about my design and editorial process.</p>
+			<div class='more_info'>
+			<p>Salary Guide visualizes and contextualizes information about the salaries of <a href='http://salaryguide.dailyillini.com/employee/9668/'>public state employees</a> at the University of Illinois. <a href='https://medium.com/p/fdf75b8086fd'>Click here</a> to read more about my design and editorial process.</p>
+			<p class='subtitle'>Built with Django, PostgreSQL, Numpy, ElasticSearch and many, many more.</p>
+			</div>
+
 
 		</div>
+
+		<div class='project'>
+			<h3>How the Illinois Legislature voted on the pension overhaul</h3>
+			<a href='http://www.dailyillini.com/news/state/article_2412c1d4-5c79-11e3-b135-001a4bcf6878.html' target="_blank"><img class='sample' src='legislature.png'/></a>
+			<p class='more'>See more</p>
+			<div class='more_info'>
+			<p>On one of those days where the state legislature unexpectedly passes a landmark bill, we had to move quickly. The resulting map demonstrates the upstate-downstate vote split in Illinois and, after some coaxing with our CMS, played nicely with our story.</p>
+			<p class='subtitle'>Built with QGIS and Leaflet.js.</p>
+			</div>
+		</div>
+		<div class='project'>
+			<h3>Unofficial 2013</h3>
+			<a href='http://bloximages.newyork1.vip.townnews.com/dailyillini.com/content/tncms/assets/v3/editorial/8/2c/82cad0f8-0d01-11e3-9509-0019bb30f31a/521921d5cd0cb.pdf.pdf' target="_blank"><img class='sample' src='blob.png'/></a>
+			<p class='more'>See more</p>
+			<div class='more_info'>
+			<p>Lovingly referred to as "The Blob" by our staff, this infographic visualized crime data on our university's favorite drinking holiday, showing how activity by out-of-towners increased as the day wore on.</p>
+			<p class='subtitle'>Built with D3.js and Adobe Illustrator.</p>
+			</div>
+		</div>
+		<div class='project'>
+			<h3>UI admits record number of students to Class of 2017</h3>
+			<a href='http://www.dailyillini.com/news/campus/html_0b90ba62-b6b1-11e2-8ea6-0019bb30f31a.html' target="_blank"><img class='sample' src='yield.png'/></a>
+			<p class='more'>See more</p>
+			<div class='more_info'>
+			<p>My first discovery of jQuery binded to D3 events <em>(I can do that?!)</em> visualized how different groups of students applied and enrolled at the U of I varied over the years. Using jQuery events, I was able to guide users through recent enrollment trends.</p>
+			<p class='subtitle'>Built with D3.js.</p>
+			</div>
+		</div>
+
+		<div class='project'>
+			<h3>Bill that would give alumni majority stake in board of trustees delayed</h3>
+			<a href='http://www.dailyillini.com/news/campus/article_e92dd148-a257-11e2-b30d-0019bb30f31a.html' target="_blank"><img class='sample' src='trustees.png'/></a>
+			<p class='more'>See more</p>
+			<div class='more_info'>
+			<p>When I came across a state bill that would change how the officers of the state university system, I wanted to look at how other states appointed those officers. My reporting also detailed the interesting relationship between the school's alumni groups and legislature.</p>
+			<p class='subtitle'>Built with Adobe Illustrator.</p>
+			</div>
+		</div>
+
+		<div class='project'>
+			<h3>I-Elect 2012</h3>
+			<a href='http://issuu.com/i-elect/docs/i-elect2012/7' target="_blank"><img class='sample' src='ielect.png'/></a>
+			<p class='more'>See more</p>
+			<div class='more_info'>
+			<p>For a class focused on the 2012 elections, I learned how to analyze survey data to extract statistically significant findings about student voting habits and preferences. This monstrosity, for which we raised money to print on Election Day 2012, details many of those relevant findings.</p>
+			<p class='subtitle'>Built with SPSS Statistics, Adobe Illustrator and InDesign.</p>
+			</div>
+		</div>
+
+		<div class='project'>
+			<h3>Aerial Disappearances</h3>
+			<a href='http://lashback.github.io/planes/planes.html' target="_blank"><img class='sample' src='planes.png'/></a>
+			<p class='more'>See more</p>
+			<div class='more_info'>
+			<p>When I began to wonder how frequently planes disappear without a trace like MH370, I hypothesized that it's become less and less frequent as tracking technology becomes more advanced. After scraping <a href='http://en.wikipedia.org/wiki/List_of_aerial_disappearances'>this</a> Wiki article, I threw together a quick viz to demonstrate the small and infrequent disappearances in recent decades.</p>
+			<p class='subtitle'>Built with D3.</p>
+			</div>
+		</div>
+		<div class='project'>
+			<h3>Landlord dispute leaves mother, son homeless</h3>
+			<a href='http://www.dailyillini.com/article_dfede4ec-3cea-5724-8a5f-51a232ef3652.html' target="_blank"><img class='sample' src='homeless.jpg'/></a>
+			<p class='more'>See more</p>
+			<div class='more_info'>
+			<p>One of my few writing clips of which I'm proud, this story came about after a woman approached The Daily Illini about her bizzare case of eviction. As I started looking into the legal issues with her case and the tenuous future she and her son would face with the loss of her Section 8 housing voucher, I went about reporting this agonizing story that highlighted some of the deepest issues with housing and landlords in Champaign-Urbana.</p>
+			</div>
+		</div>
+
 	</div>
 </div>
 
 <script>
 $('.more').click(function(){
-		$(this).next('p.more_info').slideToggle('slow');
+		$(this).next('div.more_info').slideToggle('slow');
 	});
 </script>
 
