@@ -82,6 +82,16 @@ hr {
 }
 
 .job {
+	
+	/* */
+	box-shadow: 0px 0px 5px 1px #ccc; 
+	margin: 2em 0em;
+	
+	padding: 2em 1.3em; 
+	
+}
+
+.project {
 	text-align: center;
 	
 	/* */
@@ -161,3 +171,18 @@ strong{
 
 }
 */
+
+.project .sample {
+	width:100%;
+	height:auto;
+}
+
+.more{
+	text-align: center;
+	font-family: 'Montserrat';
+	font-weight: 700;
+	cursor:hand;
+}
+.more_info{
+	display: none;
+}
