@@ -3,28 +3,32 @@
 var id = 'chart_wrapper';
 var element = document.getElementById(id);
 var color = d3.scale.category10();
-var mobile_threshold = 767;
+var mobile_threshold = 500;
 
 var margin = { top: 10, right: 10, bottom: 10, left: 10 };
 var id = 'chart_wrapper';
 
-var element = document.getElementById(id);
-var container_width = element.offsetWidth;
-console.log(container_width);
+var chart = $('#chart');
+var container_width = chart.parent().width();
+
 var container_height = element.offsetWidth; //wat. no.
 var graphic_aspect_width = 16;
 var graphic_aspect_height = 7;
 var circle, force, labels, keys;
 var columns = 3;
 var height = 350;
-if (container_width * 1.5 < mobile_threshold) {
+var dot_to_person_ratio = 3;
+
+if (container_width < mobile_threshold) {
     graphic_aspect_width = 7;
     graphic_aspect_height = 16;
     columns = 1;
     height = 250;
     margin = { top: 10, right: 10, bottom: 10, left: 10 };
+    dot_to_person_ratio = 5;
 }
-
+d3.select('#legend-row')
+    .html("<h4><span class='legend'>●</span> represents " + dot_to_person_ratio + " people</h4>");
 var width = container_width - margin.left - margin.right;
 
 //we need an 'on resize function.' Got any good listeners?
@@ -55,7 +59,7 @@ function make_data() {
     var i = 0;
     stats = _.sortBy(stats, function(d) { return d.Count});
     _(stats).each(function(disp, key) {
-        var count = Math.ceil((disp.Count) / 2.5); //all of them is like waaaaay too much
+        var count = Math.ceil((disp.Count) / dot_to_person_ratio); //all of them is like waaaaay too much
         var j = 0;
         while (j++ < count) {
             var new_line = {id: i, 'Disposition': disp.Disposition, 'Type': disp.Type, 'Position': disp.Position};
@@ -310,7 +314,7 @@ function draw_chart(step) {
             .size([width, height])
             .on('tick', tick);
 
-        if (container_width * 1.5 < mobile_threshold) {
+        if (container_width < mobile_threshold) {
             force.charge(-3);
         }
         force.start();
@@ -341,7 +345,7 @@ function draw_chart(step) {
             var circle_selection;
             var tooltip;
 
-            if (container_width * 1.5 > mobile_threshold) {
+            if (container_width >= mobile_threshold) {
             circle
                 .on('mouseover', function(d) {
                     tooltip = d3.select('#tooltip');
@@ -423,7 +427,7 @@ function switchAnnotation(newStep)
 }
 
 d3.select('#next')
-    .on('click', function() {
+    .on('click', function(e) {
         force.stop();
         //this should just iterate through an array
         if (active_step == 'step0') {
@@ -446,7 +450,7 @@ d3.select('#next')
         }
         else if (active_step == 'step6') {
             active_step = 'step0';
-        }        
+        }
         draw_chart(active_step);
         switchStep(active_step);
         switchAnnotation(active_step);
@@ -454,7 +458,8 @@ d3.select('#next')
     });
 
 d3.select('#previous')
-    .on('click', function() {
+    .on('click', function(e) {
+        
         force.stop();
         //this should just iterate through an array
         if (active_step == 'step1') {
@@ -483,4 +488,16 @@ d3.select('#previous')
         switchAnnotation(active_step);
 
     });    
+
 draw_chart(active_step);
+
+//
+// EVENT LISTENERS
+//
+
+$(window).on("resize", function() {
+    var chart = $('#chart');
+    container_width = chart.parent().width();
+    width = container_width - margin.left - margin.right;
+    draw_chart(active_step);
+});
