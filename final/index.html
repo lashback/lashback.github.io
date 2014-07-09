@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,100,100italic,700' rel='stylesheet' type='text/css'>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<script src = "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src = "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	<title>Marijuana Disposition</title>
+	<style type="text/css">
+		.d3-tip {
+			line-height: 1;
+			font-weight: bold;
+			padding: 12px;
+			background: rgba(0, 0, 0, 0.8);
+			color: #fff;
+			border-radius: 2px;
+			}
+
+			/* Creates a small triangle extender for the tooltip */
+			.d3-tip:after {
+			box-sizing: border-box;
+			display: inline;
+			font-size: 10px;
+			width: 100%;
+			line-height: 1;
+			color: rgba(0, 0, 0, 0.8);
+			content: "\25BC";
+			position: absolute;
+			text-align: center;
+			}
+
+			/* Style northward tooltips differently */
+			.d3-tip.n:after {
+			margin: -1px 0 0 0;
+			top: 100%;
+			left: 0;
+			}
+
+		body {
+			font-family: 'Roboto Condensed', sans-serif;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		h1, h2 {
+			text-align: center;
+			font-weight: 700;
+		}
+
+		h3 {
+			text-align: center;
+		}
+
+		span {
+			font-weight: 700;
+
+		}
+		
+		.active_circle {
+			stroke: 2px #000;
+			fill: #fff;
+		}
+
+		.steppers {
+			float:left;
+			display: inline-block;
+			font-size: 1em;
+		}
+		
+		.label {
+			font-size: 3em;
+			font-weight: 700;
+			stroke:#eee;
+			stroke-width: 1.5px;
+		}
+		.annotation-step {
+			display:none;
+		}
+		.active {
+			display:block;
+			text-align:center;
+		}
+		
+		span {
+			
+		}
+		span.all {
+			color:#7AA25C;
+		}
+		span.legend {
+			color:#7AA25C;
+		}
+
+		span.dismissed {
+			color:#7AA25C;
+		}
+		
+		span.convicted {
+			color:#EE9586;
+		}
+		span.jail {
+			color:#D84B2A;
+		}
+		span.discharged{
+			color:#4C4758;
+		}
+		span.prison{
+			color:#8B250D;
+		}
+		span.fine {
+			color:#725A44;
+		}
+		span.probation {
+			color:#58668B;
+		}
+		span.sentencepending {
+			color:#4C4758;
+		}
+		.footnote {
+			color:#777;
+			font-size:1em;
+		}
+		.narrative {
+			height:150px;
+		}
+		.narrative-container {
+			height:100%;
+			background-color: #444;
+		}
+	/*	@media (min-width: 766px){
+		button{
+			
+			height: 100px;
+			color: #ffffff;
+			background-color: #333;
+			font-size: 1.4em;
+			border: 2px #ffffff solid;
+			margin: 10px 0 0 5px;
+			
+			-webkit-transition: all 0.5s;
+			-moz-transition: all 0.5s;
+			transition: all 0.5s;		
+			
+			}
+		}
+
+		@media (max-width: 992px){
+			button{
+				color: #ffffff;
+				background-color: #333;
+				font-size: 1.4em;
+				text-align: center;
+				width:100%;
+				border: 2px #ffffff solid;			
+				-webkit-transition: all 0.5s;
+				-moz-transition: all 0.5s;
+				transition: all 0.5s;		
+
+			
+			}
+		}
+		button:hover{
+			cursor: pointer;
+			}
+		.highlight:hover{
+			background-color: #FFffff;
+			color: #333;
+		}*/
+		#legend {
+			border: 1px #eee solid;
+		}
+		#legend span {
+			color:#7AA25C;
+		}
+		h3 {
+			line-height: 1.5;
+		}
+		h4{
+			text-align: center;
+		}
+		.pager a {
+			color: #7AA25C;
+		}
+		.dot:hover {
+			cursor:pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class='container'>
+		<div class='headline'>
+			<h1>Marijuana possession, sale charges often dismissed</h1>
+			<hr>
+		</div>	
+		<div class='row'>
+			<div class='buttons col-xs-6 col-xs-offset-3'>
+				<ul class="pager">
+					<li><a href="#" id='previous'><span class="glyphicon glyphicon-chevron-left"></span>Previous </a></li>
+					<li><a href="#" id='next'>Next<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class='row narrative'>
+			<div id='narrative-container' class='col-md-6 col-md-offset-3 col-xs-12'>
+				<div class='annotation-step active' id='step0-annotation'>
+					<h3>In 2013, <span class='all'>2,493 people</span> were brought up on marijuana-related charges.</h3>
+				</div>
+				<div class='annotation-step' id='step1-annotation'>
+					<h3>But more than half of those were <span class='dismissed'>dismissed</span> by judges. The other 40%* were <span class='convicted'>convicted.</span></h3>
+				</div>
+				
+				<div class='annotation-step' id='step2-annotation'>
+					<h3>Of those convicted, <span class='fine'>most faced a fine</span> of $100.</h3>
+				</div>
+
+				<div class='annotation-step' id='step3-annotation'>
+					<h3>Another <span class='discharged'>94 were discharged</span> without punishment...</h3>
+				</div>
+
+				<div class='annotation-step' id='step4-annotation'>
+					<h3>...And 17 people were put <span class='probation'>on probation</span> or <span class='sentencepending'>await sentencing.</span></h3>
+				</div>
+				<div class='annotation-step' id='step5-annotation'>
+					<h3>In the end, only 5.8% of those arrested found themselves found themselves either <span class='jail'>behind bars</span> or <span class='prison'>in prison.</span></h3>
+				</div>
+
+				<div class='annotation-step' id='step6-annotation'>
+					<h3><span>Hover or tap</span> on the data to learn more.</h3>
+				</div>
+			</div>
+		</div>	
+		<div class='row'>
+			<div id='chart_wrapper' class='col-md-6 col-md-offset-3'>
+				<div id='chart'></div>
+			</div>
+		</div>
+		
+		<div class='row'>
+			<div id='tooltip'></div>
+			<h4><span class='legend'>●</span> represents 3 people</h4>
+		</div>
+
+	</div>
+
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="underscore.js"></script>
+<script src="force_enter.js"></script>
+
+</body>
+</html>
