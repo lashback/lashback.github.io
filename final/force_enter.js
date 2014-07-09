@@ -42,17 +42,17 @@ var stats =
 [{"Disposition": "Convicted-Sentence Pending","Count": 25,"Type": "Convicted", 'Position':'Sentence Pending'},
 {"Disposition":"Diverted and Dismissed","Count":5,"Type":"Dismissed", 'Position': 'Dismissed'},
 //{"Disposition":"Covered by Another Case","Count":176,"Type":"Other", 'Position': 'Other'},
-{"Disposition":"Dismissed-ACD","Count":1409,"Type":"Dismissed", 'Position': 'Dismissed'},
-{"Disposition":"Dismissed-Not ACD","Count":113,"Type":"Dismissed", 'Position': 'Dismissed'},
+{"Disposition":"Conditional Dismissal","Count":1409,"Type":"Dismissed", 'Position': 'Dismissed'},
+{"Disposition":"Unconditional Dismissal","Count":113,"Type":"Dismissed", 'Position': 'Dismissed'},
 //{"Disposition":"Other","Count":25,"Type":"Other", 'Position': 'Other'},
 {"Disposition":"Prison","Count":7,"Type":"Convicted", 'Position': 'Prison'},
 {"Disposition":"Jail","Count":79,"Type":"Convicted", 'Position': 'Jail'},
 {"Disposition":"Time Served","Count":52,"Type":"Convicted", 'Position': 'Jail'},
-{"Disposition":"Jail+Probation","Count":7,"Type":"Convicted", 'Position': 'Jail'},
+{"Disposition":"Jail and Probation","Count":7,"Type":"Convicted", 'Position': 'Jail'},
 {"Disposition":"Probation","Count":17,"Type":"Convicted", 'Position': 'Probation'},
 {"Disposition":"Fine","Count":685,"Type":"Convicted", 'Position': 'Fine'},
-{"Disposition":"Cond Discharge","Count":88,"Type":"Convicted", 'Position': 'Discharged'},
-{"Disposition":"Uncond Discharge","Count":6,"Type":"Convicted", 'Position':'Discharged'}];
+{"Disposition":"Conditional Discharge","Count":88,"Type":"Convicted", 'Position': 'Discharged'},
+{"Disposition":"Unconditional Discharge","Count":6,"Type":"Convicted", 'Position':'Discharged'}];
 
 function make_data() {
     // random times
