@@ -9,7 +9,7 @@ var margin = { top: 10, right: 10, bottom: 10, left: 10 };
 var id = 'chart_wrapper';
 
 var chart = $('#chart');
-var container_width = chart.parent().width();
+var container_width = chart.width();
 
 var container_height = element.offsetWidth; //wat. no.
 var graphic_aspect_width = 16;
@@ -69,7 +69,7 @@ function make_data() {
     });
 };
 make_data();
-console.log(dataset);
+//console.log(dataset);
 function make_focii(data, step) {
     var column_counter = 1;
     var row_counter = 1;
@@ -77,11 +77,11 @@ function make_focii(data, step) {
     //this does the fu
     foci_keys = _.uniq(foci_keys, true);
     var number_of_foci_needed = foci_keys.length;
-    console.log('foci_keys');
-    console.log(foci_keys);
+    // console.log('foci_keys');
+    // console.log(foci_keys);
     var number_of_rows_needed = Math.ceil(number_of_foci_needed / columns);
-    console.log('Number of rows:');
-    console.log(number_of_rows_needed);
+    // console.log('Number of rows:');
+    // console.log(number_of_rows_needed);
     var column_width = width / columns;
     var row_height = height / number_of_rows_needed;
     var foci = {};
@@ -92,8 +92,8 @@ function make_focii(data, step) {
     // else {
     foci.All = {x: width / 2, y: height / 2};
     // }
-    console.log('These are the foci:');
-    console.log(foci);
+    // console.log('These are the foci:');
+    // console.log(foci);
     return foci;
 }
 
@@ -101,7 +101,7 @@ var active_step = 'step0';
 function fill(d) {
     var default_color = '#7AA25C';
     if (active_step == 'step0') {
-        return default_color
+        return default_color;
     }
     if (active_step == 'step1') {
         if (d.Type == 'Convicted') {
@@ -497,7 +497,7 @@ draw_chart(active_step);
 
 $(window).on("resize", function() {
     var chart = $('#chart');
-    container_width = chart.parent().width();
+    container_width = chart.width();
     width = container_width - margin.left - margin.right;
     draw_chart(active_step);
 });
