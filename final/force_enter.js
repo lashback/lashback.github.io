@@ -142,35 +142,35 @@ function make_focii(data, step) {
 
 var active_step = 'step0';
 function fill(d) {
-    var default_color = '#486311';
+    var default_color = '#3C9455';
     if (active_step == 'step0') {
         return default_color;
     }
     if (active_step == 'step1') {
         if (d.Type == 'Convicted') {
-            return '#BE2805';
+            return '#FF6F22';
             }
         else if (d.Type == 'Other') {
-            return '#f7f7f7';
+            return '#0D1C33';
             }
         else return default_color;
         }
     else {
             if (d.Position == 'Prison') {
-                return '#DC3522';
+                return '#FF6F22';
             }
             else if (d.Position == 'Jail')
                 {
-                return '#F73707';
+                return '#DB5F4B';
             }
             else if (d.Position == 'Probation') {
-                return '#66360A'
+                return '#D58811'
             }
             else if (d.Position == 'Fine') {
-                return '#DC8505';
+                return '#D9984F';
             }
             else if (d.Position == 'Discharged') {
-                return '#6B670A';
+                return '#3E4237';
             }
             else if (d.Position == 'SentencePending') {
                 return '#AAA';
