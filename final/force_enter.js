@@ -19,6 +19,7 @@ var columns = 3;
 var height = 350;
 var dot_to_person_ratio = 3;
 var radius = 5;
+var easing = 'exp'
 if (container_width < mobile_threshold) {
     graphic_aspect_width = 7;
     graphic_aspect_height = 16;
@@ -27,6 +28,7 @@ if (container_width < mobile_threshold) {
     margin = { top: 10, right: 10, bottom: 10, left: 10 };
     dot_to_person_ratio = 6;
     radius = 3;
+    easing = 'linear'
 }
 d3.select('#legend-row')
     .html("<p><span class='legend'>●</span> " + dot_to_person_ratio + " people</p>");
@@ -320,45 +322,23 @@ var data;
 var capture;
 var center; 
 function draw_chart(step) {
+
+        
+
         var i = 0;
-        //console.log(raw);
+
         data = [];
         data = filter_data(dataset);
-
-
-        //var uniques = _.uniq(data);
-        //uniques won't work because we gave it all fucking indices fuck. 
-        //sort by count so we have the largest first.
-        //uniques = _.sortBy(uniques, function(num) { return num.Count});
-
         var foci = make_focii(data, step);
         circle = svg.selectAll('.dot')
             .data(data, function(d) {return d.id;});
         function tick(e) 
         {
-            //we need a way to keep this from falling too low.
-            //if (e.alpha 
-            // if (step == 'step3' || step == 'step4'){
-            //     var k = 5 * e.alpha;
-            // }
-            // else {
+
             var k = .2 * e.alpha; 
             data.forEach(function(d) {
-                var center = foci.All; //= {x: width / 2, y: height/2};
-                    // //if (step != 'step2') {
-                    //     center = foci.All;
-                    // //}
-                    // //else {
-                    //     if (d.Type == 'Dismissed') {
-                    //         center = foci.Dismissed;
-                    //     }
-                    //     else {
-                    //         center = foci.Convicted;
-                    //     }
-                    // }
+                var center = foci.All; 
                 capture = d;
-                // d.y += (center.y - d.y) * k;
-                // d.x += (center.x - d.x) * k;
                 d.y += (center.y - d.y) * k;
                 d.x += (center.x - d.x) * k;
             });
@@ -370,13 +350,6 @@ function draw_chart(step) {
              d.cx = -5;
              d.cy = -5;
         });
-
-        // var tip = d3.tip()
-        //   .attr('class', 'd3-tip')
-        //   .offset([-10, 0])
-        //   .html(function(d) {
-        //     return "<span style='color:#fff'>" + d.Disposition + "</span><strong>" + d.Count +"</strong> people";
-        //   });
 
         force = d3.layout.force()
             .nodes(data)
@@ -412,7 +385,7 @@ function draw_chart(step) {
             //first choice: explode!!!        
             .transition()
                 .duration(2000)
-                .ease('exp')
+                .ease(easing)
                 //.style("opacity", .5)
                 .attr('cx', function(d){
                     var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
@@ -422,27 +395,8 @@ function draw_chart(step) {
                     var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
                     return d.cy + (Math.random()* height * plusOrMinus*100);  
                 })
-            //just fall!
-            // .transition()
-            //     //.delay(100)
-            //     .duration(2000)
-            //     .ease('quad')
-            // //     .attr('cx', function(d) {
-            // //         //if it's t
-            // //         var distance_from_center = d.cx - (width/2);
-
-            // //         return (distance_from_center*width);
-            // //     }) //don't change the x attribute and it just goes buhbye
-            // // .transition()
-            //     .attr('cy', height + 6000)
-
-
-
                 //wrapup, remove the nodes. Byebye
             .remove();
-        // if (step == 'step6') {
-            
-        // }
     }
 
 
@@ -531,6 +485,7 @@ d3.select('#previous')
         }
         else if (active_step == 'step6') {
             $('#labels').slideUp();
+            $('.narrative').slideDown();
             active_step = 'step5';
         }
      //   else if (active_step == 'step6') {
