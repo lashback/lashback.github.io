@@ -3,6 +3,8 @@
 			font-weight: 700;
 		}
 
+
+	
 		h3 {
 			text-align: center;
 		}
@@ -28,10 +30,6 @@
 		#labels:hover {
 			cursor:pointer;
 		}
-		#labels {
-			font-size:1.4em;
-		}
-
 		
 		#labels table {
 			width:50%;
@@ -46,14 +44,14 @@
 		}
 
 		.active {
-			font-weight: 700;
+			
 			background-color: #d9f0d3;
 			
 		}
 		
 		span {
 			font-size: 1.8em;
-		
+		   	text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);
 		}
 
 		.Convicted {
@@ -65,6 +63,7 @@
 
 		.Fine {
 			color: #e7d4e8;
+
 		}
 		.Probation {
 			color: #c2a5cf;
@@ -141,7 +140,7 @@
 		}
 		.pager a {
 			cursor:pointer;
-			color: #7AA25C;
+			color: #1b7837;
 		}
 		.dot {
 			stroke-width: 1px;

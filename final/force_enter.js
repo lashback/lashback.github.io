@@ -84,7 +84,7 @@ function enterLabels() {
 //   });
 // }
     stats = _.sortBy(stats, function(num) { return -num.Count })
-    d3.select('#labels').style('display', 'block');
+    
     if (!labels_entered) {
     labels = d3.select("#labels").select('tbody').selectAll("tr")
         .data(stats);
@@ -107,7 +107,7 @@ function enterLabels() {
           .style("opacity", 1);
         if (container_width < mobile_threshold) {
             var flipper = false;
-            label.on('click', function(d){
+            labels.on('click', function(d){
                 circle
                     .transition()
                     .style('opacity', 1);
@@ -120,6 +120,7 @@ function enterLabels() {
                 console.log(flipper)
             })
         }
+        
  }};
 
 
@@ -438,90 +439,9 @@ function draw_chart(step) {
 
                 //wrapup, remove the nodes. Byebye
             .remove();
-        if (step == 'step6') {
-            // var circle_selection;
-            // var inverse_selection;
-            // var tooltip;
-            enterLabels()
-            labels_entered = true;
-
-
-            // if (container_width >= mobile_threshold) {
-            // circle
-            //     .on('mouseover', function(d) {
-            //         tooltip = d3.select('#tooltip');
-            //         inverse_selection = circle.filter(function(e) {
-            //             if (e.Disposition === d.Disposition) {
-            //                 return false; }
-            //             else {
-            //                 return true;
-            //             }
-            //         });
-
-            //         circle_selection = circle.filter(function(e) {
-            //             if (e.Disposition === d.Disposition) {
-            //                 return true; }
-            //             else {
-            //                 return false;
-            //             }
-            //         });
-            //         inverse_selection
-            //              .transition()
-            //                  .duration(200)
-            //                  .style('fill', '#eee') 
-            //                 //.style('fill', function(d) { return d3.rgb(getComputedStyle(this, null).getPropertyValue("fill")).brighter();})
-            //                 // .style('stroke-width', '2px')
-            //                 // .style('stroke', '#333');
-            //         tooltip
-            //             .html(function() {
-            //                 return '<h3>' + d.Disposition + ': <span>' + circle_selection[0].length + '</h3>';
-            //             })
-            //     })
-            //     .on('mouseout', function(d) {
-            //         inverse_selection
-            //             .transition()
-            //                 .duration(400)
-            //                 .style('fill', fill)
-            //                 //.style('stroke', '0px')
-            //     });
-            // }
-            // else {
-            //     circle
-            //         .on('click', function(d) {
-            //             tooltip.html('');
-
-            //             tooltip = d3.select('#tooltip');
-            //             inverse_selection = circle.filter(function(e) {
-            //                 if (e.Disposition === d.Disposition) {
-            //                     return true; }
-            //                 else {
-            //                     return false;
-            //                 }
-            //             });
-
-            //             circle_selection
-            //                 .transition()
-            //                     .duration(400)
-            //                     .style('fill', fill);
-            //             circle_selection = circle.filter(function(e) {
-            //                 if (e.Disposition === d.Disposition) {
-            //                     return true; }
-            //                 else {
-            //                     return false;
-            //                 }
-            //             });
-            //             circle_selection
-            //                  .transition()
-            //                      .duration(200)
-            //                     .style('fill', '#fff');
-            //             tooltip
-            //                 .html(function() {
-            //                     return '<h3>' + d.Disposition + ': <span>' + circle_selection[0].length + '</h3>';
-            //                 });
-            //     })
-            // }
-
-        }
+        // if (step == 'step6') {
+            
+        // }
     }
 
 
@@ -549,9 +469,11 @@ d3.select('#next')
         force.stop();
         //this should just iterate through an array
         if (active_step == 'step0') {
+            $('#previous').show()
             active_step = 'step1';
         }
         else if (active_step == 'step1') {
+
             active_step = 'step2';
         }
         else if (active_step == 'step2') {
@@ -565,9 +487,19 @@ d3.select('#next')
         }
         else if (active_step == 'step5') {
             active_step = 'step6';
+            $('.narrative').slideUp();
+            enterLabels();
+            $('#labels').slideDown()
+            labels_entered = true;
+
+            
         }
         else if (active_step == 'step6') {
             active_step = 'step0';
+
+            $('#labels').slideUp();
+            $('.narrative').slideDown();
+            $('#previous').hide()
         }
         draw_chart(active_step);
         switchStep(active_step);
@@ -581,6 +513,7 @@ d3.select('#previous')
         force.stop();
         //this should just iterate through an array
         if (active_step == 'step1') {
+            $('#previous').hide();
             active_step = 'step0';
         }
         else if (active_step == 'step2') {
@@ -596,6 +529,7 @@ d3.select('#previous')
             active_step = 'step4';
         }
         else if (active_step == 'step6') {
+            $('#labels').slideUp();
             active_step = 'step5';
         }
      //   else if (active_step == 'step6') {
@@ -606,6 +540,12 @@ d3.select('#previous')
         switchAnnotation(active_step);
 
     });    
+if (active_step == 'step0') {
+    
+}
+else {
+    
+}
 switchAnnotation(active_step);
 draw_chart(active_step);
 
