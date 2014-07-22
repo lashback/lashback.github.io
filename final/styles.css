@@ -1,0 +1,135 @@
+		h1, h2 {
+			text-align: center;
+			font-weight: 700;
+		}
+
+		h3 {
+			text-align: center;
+		}
+
+		span {
+			font-weight: 700;
+
+		}
+		
+		.active_circle {
+			stroke: 2px #000;
+			fill: #fff;
+		}
+
+		.steppers {
+			float:left;
+			display: inline-block;
+			font-size: 1em;
+		}
+		
+		#labels:hover {
+			cursor:pointer;
+		}
+		#labels p {
+			font-size:1.4em;
+		}
+		.annotation-step {
+			display:none;
+		}
+
+		.active {
+			font-weight: 700;
+		}
+		
+		span {
+			font-size: 1.8em;
+			text-shadow: -2px 1px 2px rgba(150, 150, 150, 1);
+		}
+
+		.Convicted {
+			color:#762a83;	
+		}
+		.Discharged {
+			color: #a6dba0;
+		}
+
+		.Fine {
+			color: #e7d4e8;
+		}
+		.Probation {
+			color: #c2a5cf;
+		}
+		.Jail {
+			color:#9970ab;
+		}
+		.Prison {
+			color: #762a83;
+		}
+		.Dismissed {
+			color: #1b7837;
+		}
+		.SentencePending {
+			color: #d9f0d3;
+		}
+
+		span.all {
+			color:#1b7837;
+		}
+		span.legend {
+			color:#1b7837;
+		}
+		#legend-row {
+			text-align: center;
+		}
+
+/*		span.dismissed {
+			color:#7AA25C;
+		}
+		
+		span.convicted {
+			color:#EE9586;
+		}
+		span.jail {
+			color:#D84B2A;
+		}
+		span.discharged{
+			color:#4C4758;
+		}
+		span.prison{
+			color:#8B250D;
+		}
+		span.fine {
+			color:#725A44;
+		}
+		span.probation {
+			color:#58668B;
+		}
+		span.sentencepending {
+			color:#4C4758;
+		}*/
+
+		.footnote {
+			color:#777;
+			font-size:1em;
+		}
+		.narrative {
+			height:200px;
+		}
+		.narrative-container {
+			height:100%;
+			background-color: #444;
+		}
+		#legend {
+			border: 1px #eee solid;
+		}
+		
+		h3 {
+			line-height: 1.5;
+		}
+		h4{
+			text-align: center;
+		}
+		.pager a {
+			cursor:pointer;
+			color: #7AA25C;
+		}
+		.dot {
+			stroke-width: 1px;
+			stroke: #bbb;
+		}
