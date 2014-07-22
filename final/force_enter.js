@@ -343,12 +343,21 @@ function draw_chart(step) {
             .remove();
         if (step == 'step6') {
             var circle_selection;
+            var inverse_selection;
             var tooltip;
 
             if (container_width >= mobile_threshold) {
             circle
                 .on('mouseover', function(d) {
                     tooltip = d3.select('#tooltip');
+                    inverse_selection = circle.filter(function(e) {
+                        if (e.Disposition === d.Disposition) {
+                            return false; }
+                        else {
+                            return true;
+                        }
+                    });
+
                     circle_selection = circle.filter(function(e) {
                         if (e.Disposition === d.Disposition) {
                             return true; }
@@ -356,10 +365,11 @@ function draw_chart(step) {
                             return false;
                         }
                     });
-                    circle_selection
+                    inverse_selection
                          .transition()
                              .duration(200)
-                            .style('fill', function(d) { return d3.rgb(getComputedStyle(this, null).getPropertyValue("fill")).brighter();})
+                             .style('fill', '#eee') 
+                            //.style('fill', function(d) { return d3.rgb(getComputedStyle(this, null).getPropertyValue("fill")).brighter();})
                             // .style('stroke-width', '2px')
                             // .style('stroke', '#333');
                     tooltip
@@ -368,7 +378,7 @@ function draw_chart(step) {
                         })
                 })
                 .on('mouseout', function(d) {
-                    circle_selection
+                    inverse_selection
                         .transition()
                             .duration(400)
                             .style('fill', fill)
@@ -381,6 +391,14 @@ function draw_chart(step) {
                         tooltip.html('');
 
                         tooltip = d3.select('#tooltip');
+                        inverse_selection = circle.filter(function(e) {
+                            if (e.Disposition === d.Disposition) {
+                                return true; }
+                            else {
+                                return false;
+                            }
+                        });
+
                         circle_selection
                             .transition()
                                 .duration(400)
@@ -395,7 +413,7 @@ function draw_chart(step) {
                         circle_selection
                              .transition()
                                  .duration(200)
-                                .style('fill', function(d) { return d3.rgb(getComputedStyle(this, null).getPropertyValue("fill")).brighter();})
+                                .style('fill', '#fff');
                         tooltip
                             .html(function() {
                                 return '<h3>' + d.Disposition + ': <span>' + circle_selection[0].length + '</h3>';
