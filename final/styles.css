@@ -22,19 +22,33 @@
 			display: inline-block;
 			font-size: 1em;
 		}
-
+		#labels {
+			display:none;
+		}
 		#labels:hover {
 			cursor:pointer;
 		}
-		#labels p {
+		#labels {
 			font-size:1.4em;
 		}
+
+		
+		#labels table {
+			width:50%;
+			margin: 0 auto;
+		}
+		#labels tr {
+			border-bottom: 1px solid #ccc;
+		}
+
 		.annotation-step {
 			display:none;
 		}
 
 		.active {
 			font-weight: 700;
+			background-color: #d9f0d3;
+			
 		}
 		
 		span {
@@ -132,4 +146,7 @@
 		.dot {
 			stroke-width: 1px;
 			stroke: #bbb;
+		}
+		#container {
+			width:100%;
 		}

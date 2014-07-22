@@ -57,7 +57,7 @@ var stats =
 
 var labels;
 var labels_entered = false;
-
+var format = d3.format(",");
 function fade(label) {   
     circle
         .transition()    
@@ -71,30 +71,56 @@ function fade(label) {
             })
 }
 function enterLabels() {
+//     template_html = $("#labelTemplate").html();
+//     template = _.template(template_html);
+//     $container = $("#container");
+//     ;
+//     var table_header = '';
+//     $container.append(table_header);
+//     _(stats).each(function(element, index, list) {
+//         $container.append(template(element));
+//     $container.append('</tbody></table>');
+    
+//   });
+// }
+    stats = _.sortBy(stats, function(num) { return -num.Count })
+    d3.select('#labels').style('display', 'block');
     if (!labels_entered) {
-    labels = d3.select("#labels").selectAll("a")
+    labels = d3.select("#labels").select('tbody').selectAll("tr")
         .data(stats);
-      labels.enter().append("div")
+      labels.enter().append("tr")
         .on('mouseover', function(d) {
-            d3.selectAll('#labels div').classed('active', false);
+            d3.selectAll('tr').classed('active', false);
             d3.select(this).classed('active', true);
             fade(d.Disposition);
          })
         .on('mouseout', function(d){
-            d3.selectAll('#labels div').classed('active', false);
+            d3.selectAll('tr').classed('active', false);
             circle
                 .transition()
                 .style('opacity', 1);
         })
-        .classed("col-sm-4 col-xs-6", true)
-        .html(function(d) { return ("<p><span class='" +d.Position+ "'>●</span>" + d.Disposition + ": " + d.Count + " people</p>") })
+        .html(function(d) { return ("<td><span class='" +d.Position+ "'>●</span></td><td>" + format(d.Count) + "</td><td>" + d.Disposition + "</td>") })
         .style("opacity", 1e-6)
           .transition()
           .duration(1000)
           .style("opacity", 1);
-   }
-}
-
+        if (container_width < mobile_threshold) {
+            var flipper = false;
+            label.on('click', function(d){
+                circle
+                    .transition()
+                    .style('opacity', 1);
+                d3.selectAll('tr').classed('active', false);
+                if (flipper == false) {
+                    d3.select(this).classed('active', true);
+                    fade(d.Disposition);
+                }
+                flipper = !flipper;
+                console.log(flipper)
+            })
+        }
+ }};
 
 
 function make_data() {
