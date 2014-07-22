@@ -74,18 +74,6 @@ function fade(label) {
             })
 }
 function enterLabels() {
-//     template_html = $("#labelTemplate").html();
-//     template = _.template(template_html);
-//     $container = $("#container");
-//     ;
-//     var table_header = '';
-//     $container.append(table_header);
-//     _(stats).each(function(element, index, list) {
-//         $container.append(template(element));
-//     $container.append('</tbody></table>');
-    
-//   });
-// }
     stats = _.sortBy(stats, function(num) { return -num.Count })
     
     if (!labels_entered) {
@@ -130,6 +118,9 @@ function enterLabels() {
 function make_data() {
     // random times
     var i = 0;
+    // var weedline = {id: i, 'Disposition': 'leaf', 'Type': 'leaf', 'Position': 'leaf'}
+    // dataset.push(weedline);
+    // i++;
     stats = _.sortBy(stats, function(d) { return d.Count});
     _(stats).each(function(disp, key) {
         var count = Math.ceil((disp.Count) / dot_to_person_ratio); //all of them is like waaaaay too much
@@ -144,41 +135,20 @@ function make_data() {
 make_data();
 //console.log(dataset);
 function make_focii(data, step) {
-    var column_counter = 1;
-    var row_counter = 1;
-    var foci_keys = _.pluck(data, 'Position');
-    //this does the fu
-    foci_keys = _.uniq(foci_keys, true);
-    var number_of_foci_needed = foci_keys.length;
-    // console.log('foci_keys');
-    // console.log(foci_keys);
-    var number_of_rows_needed = Math.ceil(number_of_foci_needed / columns);
-    // console.log('Number of rows:');
-    // console.log(number_of_rows_needed);
-    var column_width = width / columns;
-    var row_height = height / number_of_rows_needed;
     var foci = {};
-    // if (step == 'step2') {
-    //     foci.Convicted = {x: (width / 6) * 1, y: (height / 2) * 1};
-    //     foci.Dismissed = {x: (width / 6) * 5, y: ((height / 2) * 1)};
-    // }
-    // else {
     foci.All = {x: width / 2, y: height / 2};
-    // }
-    // console.log('These are the foci:');
-    // console.log(foci);
     return foci;
 }
 
 var active_step = 'step0';
 function fill(d) {
-    var default_color = '#1b7837';
+    var default_color = '#486311';
     if (active_step == 'step0') {
         return default_color;
     }
     if (active_step == 'step1') {
         if (d.Type == 'Convicted') {
-            return '#762a83';
+            return '#BE2805';
             }
         else if (d.Type == 'Other') {
             return '#f7f7f7';
@@ -187,74 +157,37 @@ function fill(d) {
         }
     else {
             if (d.Position == 'Prison') {
-                return '#762a83';
+                return '#DC3522';
             }
             else if (d.Position == 'Jail')
                 {
-                return '#9970ab';
+                return '#F73707';
             }
             else if (d.Position == 'Probation') {
-                return '#c2a5cf'
+                return '#66360A'
             }
             else if (d.Position == 'Fine') {
-                return '#e7d4e8';
+                return '#DC8505';
             }
             else if (d.Position == 'Discharged') {
-                return '#a6dba0';
+                return '#6B670A';
             }
             else if (d.Position == 'SentencePending') {
-                return '#d9f0d3';
+                return '#AAA';
             }   
             else if (d.Position == 'Other') {
-                return '#f7f7f7';
+                return '#AAA';
             }
     }
-    // return color(d.Disposition);
     return default_color;
 }
-// Nonetheless, there's 
-// Somewhere along the way. 
-// There's some refining. 
-// Make it as BOb?
-// what about showing a flow on a day-by-day basis
-//Try the day thing. Feed in a day, a month, a year...
-//Tell Bob's story. If we knew about it
-// the only reason previous loophole. Have them enter. Fall from one
 
-function build_narrative(active_step, data) {
-    var narrative = d3.select('#narrative');
-    // narrative.enter(
-    //     )
-    // .text(
-    //     function (d) { 
-    //         return//
-    //     }
-    //     )
-
-}
-
-//step1: all
-//step2: all but separated
-//step3: Convicted
-//step4: convic
 function filter_data(data) {
         var filtered;
         if (active_step == 'step0' || active_step == 'step1' || active_step == 'step6') {
             filtered = data;
-        }
 
-        // else if (active_step == 'step2') {
-        //     //reject 'other'
-        //     filtered = _.reject(data, function(d) {
-        //     //var flag = 0;
-        //     if (d.Type == 'Other') {
-        //         return Boolean(true);
-        //     }
-        //     else {
-        //         return Boolean(false);
-        //         }
-        //     });
-        // }
+        }
         else if (active_step == 'step2') {
             filtered = _.filter(data, function(d) {
                //var flag = 0;
@@ -321,12 +254,11 @@ function filter_data(data) {
 var data;
 var capture;
 var center; 
-function draw_chart(step) {
 
         
+function draw_chart(step) {
 
         var i = 0;
-
         data = [];
         data = filter_data(dataset);
         var foci = make_focii(data, step);
@@ -363,6 +295,7 @@ function draw_chart(step) {
         }
         force.start();
         
+
         circle.enter()
             .append('circle')
             .attr('class', 'dot')
