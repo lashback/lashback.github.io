@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,100,100italic,700' rel='stylesheet' type='text/css'>
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="styles.css" rel="stylesheet">
 
 
 	<script src = "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -18,150 +19,6 @@
 			margin-left: auto;
 			margin-right: auto;
 		}
-		h1, h2 {
-			text-align: center;
-			font-weight: 700;
-		}
-
-		h3 {
-			text-align: center;
-		}
-
-		span {
-			font-weight: 700;
-
-		}
-		
-		.active_circle {
-			stroke: 2px #000;
-			fill: #fff;
-		}
-
-		.steppers {
-			float:left;
-			display: inline-block;
-			font-size: 1em;
-		}
-		
-		.label {
-			font-size: 3em;
-			font-weight: 700;
-			stroke:#eee;
-			stroke-width: 1.5px;
-		}
-		.annotation-step {
-			display:none;
-		}
-		.active {
-			display:block;
-			text-align:center;
-		}
-		
-		span {
-			
-		}
-		span.all {
-			color:#7AA25C;
-		}
-		span.legend {
-			color:#7AA25C;
-		}
-
-		span.dismissed {
-			color:#7AA25C;
-		}
-		
-		span.convicted {
-			color:#EE9586;
-		}
-		span.jail {
-			color:#D84B2A;
-		}
-		span.discharged{
-			color:#4C4758;
-		}
-		span.prison{
-			color:#8B250D;
-		}
-		span.fine {
-			color:#725A44;
-		}
-		span.probation {
-			color:#58668B;
-		}
-		span.sentencepending {
-			color:#4C4758;
-		}
-		.footnote {
-			color:#777;
-			font-size:1em;
-		}
-		.narrative {
-			height:150px;
-		}
-		.narrative-container {
-			height:100%;
-			background-color: #444;
-		}
-	/*	@media (min-width: 766px){
-		button{
-			
-			height: 100px;
-			color: #ffffff;
-			background-color: #333;
-			font-size: 1.4em;
-			border: 2px #ffffff solid;
-			margin: 10px 0 0 5px;
-			
-			-webkit-transition: all 0.5s;
-			-moz-transition: all 0.5s;
-			transition: all 0.5s;		
-			
-			}
-		}
-
-		@media (max-width: 992px){
-			button{
-				color: #ffffff;
-				background-color: #333;
-				font-size: 1.4em;
-				text-align: center;
-				width:100%;
-				border: 2px #ffffff solid;			
-				-webkit-transition: all 0.5s;
-				-moz-transition: all 0.5s;
-				transition: all 0.5s;		
-
-			
-			}
-		}
-		button:hover{
-			cursor: pointer;
-			}
-		.highlight:hover{
-			background-color: #FFffff;
-			color: #333;
-		}*/
-		#legend {
-			border: 1px #eee solid;
-		}
-		#legend span {
-			color:#7AA25C;
-		}
-		h3 {
-			line-height: 1.5;
-		}
-		h4{
-			text-align: center;
-		}
-		.pager a {
-			cursor:pointer;
-			color: #7AA25C;
-		}
-		.dot:hover {
-			cursor:pointer;
-		}
-
 
 	</style>
 </head>
@@ -186,26 +43,26 @@
 					<h3>In 2013, <span class='all'>2,493 people</span> were brought up on marijuana-related charges.</h3>
 				</div>
 				<div class='annotation-step' id='step1-annotation'>
-					<h3>But more than half of those were <span class='dismissed'>dismissed</span> by judges. The other 40%* were <span class='convicted'>convicted.</span></h3>
+					<h3>But more than half of those were <span class='Dismissed'>dismissed</span> by judges. The other 40%* were <span class='Convicted'>convicted.</span></h3>
 				</div>
 				
 				<div class='annotation-step' id='step2-annotation'>
-					<h3>Of those convicted, <span class='fine'>most faced a fine</span> of $100.</h3>
+					<h3>Of those convicted, <span class='Fine'>most faced a fine</span> of $100.</h3>
 				</div>
 
 				<div class='annotation-step' id='step3-annotation'>
-					<h3>Another <span class='discharged'>94 were discharged</span> without punishment...</h3>
+					<h3>Another <span class='Discharged'>94 were discharged</span> without punishment...</h3>
 				</div>
 
 				<div class='annotation-step' id='step4-annotation'>
-					<h3>...And 17 people were put <span class='probation'>on probation</span> or <span class='sentencepending'>await sentencing.</span></h3>
+					<h3>...And 17 people were put <span class='Probation'>on probation</span> or <span class='SentencePending'>await sentencing.</span></h3>
 				</div>
 				<div class='annotation-step' id='step5-annotation'>
-					<h3>In the end, only 5.8% of those arrested found themselves either <span class='jail'>behind bars</span> or <span class='prison'>in prison.</span></h3>
+					<h3>In the end, only 5.8% of those arrested found themselves either <span class='Jail'>behind bars</span> or <span class='Prison'>in prison.</span></h3>
 				</div>
 
 				<div class='annotation-step' id='step6-annotation'>
-					<h3><span>Hover or tap</span> on the data to learn more.</h3>
+					<!--<h3><span>Hover or tap</span> on the data to learn more.</h3> -->
 				</div>
 			</div>
 		</div>	
@@ -214,9 +71,12 @@
 				<div id='chart'></div>
 			</div>
 		</div>
-		
 		<div class='row'>
-			<div id='tooltip'></div>
+			<div class='col-md-8 col-md-offset-2 col-sm-12'>
+				<div id='labels' class='row-fluid'></div>
+			</div>
+		</div>
+		<div class='row-fluid'>
 			<div id='legend-row'></div>
 		</div>
 

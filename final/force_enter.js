@@ -28,7 +28,7 @@ if (container_width < mobile_threshold) {
     dot_to_person_ratio = 5;
 }
 d3.select('#legend-row')
-    .html("<h4><span class='legend'>●</span> represents " + dot_to_person_ratio + " people</h4>");
+    .html("<p><span class='legend'>●</span> " + dot_to_person_ratio + " people</p>");
 var width = container_width - margin.left - margin.right;
 
 //we need an 'on resize function.' Got any good listeners?
@@ -37,22 +37,65 @@ var svg = d3.select('#chart').append('svg')
     .attr('width', width)
     .attr('height', height);
 
-var dataset = [];
+var dataset= [];
 var stats = 
-[{"Disposition": "Convicted-Sentence Pending","Count": 25,"Type": "Convicted", 'Position':'Sentence Pending'},
-{"Disposition":"Diverted and Dismissed","Count":5,"Type":"Dismissed", 'Position': 'Dismissed'},
-//{"Disposition":"Covered by Another Case","Count":176,"Type":"Other", 'Position': 'Other'},
-{"Disposition":"Conditional Dismissal","Count":1409,"Type":"Dismissed", 'Position': 'Dismissed'},
-{"Disposition":"Unconditional Dismissal","Count":113,"Type":"Dismissed", 'Position': 'Dismissed'},
-//{"Disposition":"Other","Count":25,"Type":"Other", 'Position': 'Other'},
+[
 {"Disposition":"Prison","Count":7,"Type":"Convicted", 'Position': 'Prison'},
 {"Disposition":"Jail","Count":79,"Type":"Convicted", 'Position': 'Jail'},
-{"Disposition":"Time Served","Count":52,"Type":"Convicted", 'Position': 'Jail'},
 {"Disposition":"Jail and Probation","Count":7,"Type":"Convicted", 'Position': 'Jail'},
+{"Disposition":"Time Served","Count":52,"Type":"Convicted", 'Position': 'Jail'},
 {"Disposition":"Probation","Count":17,"Type":"Convicted", 'Position': 'Probation'},
 {"Disposition":"Fine","Count":685,"Type":"Convicted", 'Position': 'Fine'},
 {"Disposition":"Conditional Discharge","Count":88,"Type":"Convicted", 'Position': 'Discharged'},
-{"Disposition":"Unconditional Discharge","Count":6,"Type":"Convicted", 'Position':'Discharged'}];
+{"Disposition":"Unconditional Discharge","Count":6,"Type":"Convicted", 'Position':'Discharged'},
+{"Disposition": "Convicted-Sentence Pending","Count": 25,"Type": "Convicted", 'Position':'SentencePending'},
+{"Disposition":"Diverted and Dismissed","Count":5,"Type":"Dismissed", 'Position': 'Dismissed'},
+//{"Disposition":"Covered by Anotehr Case","Count":176,"Type":"Other", 'Position': 'Other'},
+{"Disposition":"Conditional Dismissal","Count":1409,"Type":"Dismissed", 'Position': 'Dismissed'},
+{"Disposition":"Unconditional Dismissal","Count":113,"Type":"Dismissed", 'Position': 'Dismissed'}];
+// {"Disposition":"Other","Count":25,"Type":"Other", 'Position': 'Other'},
+
+var labels;
+var labels_entered = false;
+
+function fade(label) {   
+    circle
+        .transition()    
+            .style("opacity", function(d) {
+                if (d.Disposition == label) {
+                    return 1; 
+                } 
+                else {
+                    return .1;
+                }
+            })
+}
+function enterLabels() {
+    if (!labels_entered) {
+    labels = d3.select("#labels").selectAll("a")
+        .data(stats);
+      labels.enter().append("div")
+        .on('mouseover', function(d) {
+            d3.selectAll('#labels div').classed('active', false);
+            d3.select(this).classed('active', true);
+            fade(d.Disposition);
+         })
+        .on('mouseout', function(d){
+            d3.selectAll('#labels div').classed('active', false);
+            circle
+                .transition()
+                .style('opacity', 1);
+        })
+        .classed("col-sm-4 col-xs-6", true)
+        .html(function(d) { return ("<p><span class='" +d.Position+ "'>●</span>" + d.Disposition + ": " + d.Count + " people</p>") })
+        .style("opacity", 1e-6)
+          .transition()
+          .duration(1000)
+          .style("opacity", 1);
+   }
+}
+
+
 
 function make_data() {
     // random times
@@ -99,41 +142,41 @@ function make_focii(data, step) {
 
 var active_step = 'step0';
 function fill(d) {
-    var default_color = '#7AA25C';
+    var default_color = '#1b7837';
     if (active_step == 'step0') {
         return default_color;
     }
     if (active_step == 'step1') {
         if (d.Type == 'Convicted') {
-            return '#EE9586';
+            return '#762a83';
             }
         else if (d.Type == 'Other') {
-            return '#AAAAAA';
+            return '#f7f7f7';
             }
         else return default_color;
         }
     else {
-            if (d.Position == 'Jail')
+            if (d.Position == 'Prison') {
+                return '#762a83';
+            }
+            else if (d.Position == 'Jail')
                 {
-                return '#D84B2A';
-            }
-            else if (d.Position == 'Prison') {
-                return '#8B250D';
-            }
-            else if (d.Position == 'Fine') {
-                return '#725A44';
-            }
-            else if (d.Position == 'Discharged') {
-                return '#4C4758';
-            }
-            else if (d.Position == 'Sentence Pending') {
-                return '#4C4758';
+                return '#9970ab';
             }
             else if (d.Position == 'Probation') {
-                return '#58668B'
+                return '#c2a5cf'
             }
+            else if (d.Position == 'Fine') {
+                return '#e7d4e8';
+            }
+            else if (d.Position == 'Discharged') {
+                return '#a6dba0';
+            }
+            else if (d.Position == 'SentencePending') {
+                return '#d9f0d3';
+            }   
             else if (d.Position == 'Other') {
-                return '#AAAAAA';
+                return '#f7f7f7';
             }
     }
     // return color(d.Disposition);
@@ -211,7 +254,7 @@ function filter_data(data) {
             filtered = _.filter(data, function(d) {
                //var flag = 0;
                //cut out 
-                if (d.Position == 'Jail' || d.Position == 'Prison' || d.Position == 'Probation' || d.Position == 'Sentence Pending') {
+                if (d.Position == 'Jail' || d.Position == 'Prison' || d.Position == 'Probation' || d.Position == 'SentencePending') {
                     return Boolean(true);
                 }
                 else {
@@ -318,108 +361,139 @@ function draw_chart(step) {
             force.charge(-3);
         }
         force.start();
+        
         circle.enter()
             .append('circle')
             .attr('class', 'dot')
-            .attr('r', 3)
+            .attr('r', 5)
             .style('fill', fill)
+            .style("opacity", 1)
             .attr('cx', -10)
             .attr('cy', -10);
         // update. Transition the color change.
         circle
+            .style("opacity", 1)
             .transition()
-                .delay(400)
-                .duration(1250)
+                .delay(100)
+                .duration(1000)
                 .style('fill', fill);
 
         // exit
+    
         circle.exit()
+            //first choice: explode!!!        
             .transition()
-                .delay(400)
                 .duration(2000)
-                .ease('quad')
-                //.attr('cx', width / 2) //don't change the x attribute and it just goes buhbye
-                .attr('cy', height + 300)
+                .ease('exp')
+                //.style("opacity", .5)
+                .attr('cx', function(d){
+                    var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+                    return d.cx + (Math.random()*width * plusOrMinus*100);
+                })
+                .attr('cy', function(d){
+                    var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+                    return d.cy + (Math.random()* height * plusOrMinus*100);  
+                })
+            //just fall!
+            // .transition()
+            //     //.delay(100)
+            //     .duration(2000)
+            //     .ease('quad')
+            // //     .attr('cx', function(d) {
+            // //         //if it's t
+            // //         var distance_from_center = d.cx - (width/2);
+
+            // //         return (distance_from_center*width);
+            // //     }) //don't change the x attribute and it just goes buhbye
+            // // .transition()
+            //     .attr('cy', height + 6000)
+
+
+
+                //wrapup, remove the nodes. Byebye
             .remove();
         if (step == 'step6') {
-            var circle_selection;
-            var inverse_selection;
-            var tooltip;
+            // var circle_selection;
+            // var inverse_selection;
+            // var tooltip;
+            enterLabels()
+            labels_entered = true;
 
-            if (container_width >= mobile_threshold) {
-            circle
-                .on('mouseover', function(d) {
-                    tooltip = d3.select('#tooltip');
-                    inverse_selection = circle.filter(function(e) {
-                        if (e.Disposition === d.Disposition) {
-                            return false; }
-                        else {
-                            return true;
-                        }
-                    });
 
-                    circle_selection = circle.filter(function(e) {
-                        if (e.Disposition === d.Disposition) {
-                            return true; }
-                        else {
-                            return false;
-                        }
-                    });
-                    inverse_selection
-                         .transition()
-                             .duration(200)
-                             .style('fill', '#eee') 
-                            //.style('fill', function(d) { return d3.rgb(getComputedStyle(this, null).getPropertyValue("fill")).brighter();})
-                            // .style('stroke-width', '2px')
-                            // .style('stroke', '#333');
-                    tooltip
-                        .html(function() {
-                            return '<h3>' + d.Disposition + ': <span>' + circle_selection[0].length + '</h3>';
-                        })
-                })
-                .on('mouseout', function(d) {
-                    inverse_selection
-                        .transition()
-                            .duration(400)
-                            .style('fill', fill)
-                            //.style('stroke', '0px')
-                });
-            }
-            else {
-                circle
-                    .on('click', function(d) {
-                        tooltip.html('');
+            // if (container_width >= mobile_threshold) {
+            // circle
+            //     .on('mouseover', function(d) {
+            //         tooltip = d3.select('#tooltip');
+            //         inverse_selection = circle.filter(function(e) {
+            //             if (e.Disposition === d.Disposition) {
+            //                 return false; }
+            //             else {
+            //                 return true;
+            //             }
+            //         });
 
-                        tooltip = d3.select('#tooltip');
-                        inverse_selection = circle.filter(function(e) {
-                            if (e.Disposition === d.Disposition) {
-                                return true; }
-                            else {
-                                return false;
-                            }
-                        });
+            //         circle_selection = circle.filter(function(e) {
+            //             if (e.Disposition === d.Disposition) {
+            //                 return true; }
+            //             else {
+            //                 return false;
+            //             }
+            //         });
+            //         inverse_selection
+            //              .transition()
+            //                  .duration(200)
+            //                  .style('fill', '#eee') 
+            //                 //.style('fill', function(d) { return d3.rgb(getComputedStyle(this, null).getPropertyValue("fill")).brighter();})
+            //                 // .style('stroke-width', '2px')
+            //                 // .style('stroke', '#333');
+            //         tooltip
+            //             .html(function() {
+            //                 return '<h3>' + d.Disposition + ': <span>' + circle_selection[0].length + '</h3>';
+            //             })
+            //     })
+            //     .on('mouseout', function(d) {
+            //         inverse_selection
+            //             .transition()
+            //                 .duration(400)
+            //                 .style('fill', fill)
+            //                 //.style('stroke', '0px')
+            //     });
+            // }
+            // else {
+            //     circle
+            //         .on('click', function(d) {
+            //             tooltip.html('');
 
-                        circle_selection
-                            .transition()
-                                .duration(400)
-                                .style('fill', fill);
-                        circle_selection = circle.filter(function(e) {
-                            if (e.Disposition === d.Disposition) {
-                                return true; }
-                            else {
-                                return false;
-                            }
-                        });
-                        circle_selection
-                             .transition()
-                                 .duration(200)
-                                .style('fill', '#fff');
-                        tooltip
-                            .html(function() {
-                                return '<h3>' + d.Disposition + ': <span>' + circle_selection[0].length + '</h3>';
-                            });
-                })
-            }
+            //             tooltip = d3.select('#tooltip');
+            //             inverse_selection = circle.filter(function(e) {
+            //                 if (e.Disposition === d.Disposition) {
+            //                     return true; }
+            //                 else {
+            //                     return false;
+            //                 }
+            //             });
+
+            //             circle_selection
+            //                 .transition()
+            //                     .duration(400)
+            //                     .style('fill', fill);
+            //             circle_selection = circle.filter(function(e) {
+            //                 if (e.Disposition === d.Disposition) {
+            //                     return true; }
+            //                 else {
+            //                     return false;
+            //                 }
+            //             });
+            //             circle_selection
+            //                  .transition()
+            //                      .duration(200)
+            //                     .style('fill', '#fff');
+            //             tooltip
+            //                 .html(function() {
+            //                     return '<h3>' + d.Disposition + ': <span>' + circle_selection[0].length + '</h3>';
+            //                 });
+            //     })
+            // }
 
         }
     }
@@ -506,7 +580,7 @@ d3.select('#previous')
         switchAnnotation(active_step);
 
     });    
-
+switchAnnotation(active_step);
 draw_chart(active_step);
 
 //
