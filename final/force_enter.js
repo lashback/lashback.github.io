@@ -18,14 +18,15 @@ var circle, force, labels, keys;
 var columns = 3;
 var height = 350;
 var dot_to_person_ratio = 3;
-
+var radius = 5;
 if (container_width < mobile_threshold) {
     graphic_aspect_width = 7;
     graphic_aspect_height = 16;
     columns = 1;
     height = 250;
     margin = { top: 10, right: 10, bottom: 10, left: 10 };
-    dot_to_person_ratio = 5;
+    dot_to_person_ratio = 6;
+    radius = 3;
 }
 d3.select('#legend-row')
     .html("<p><span class='legend'>●</span> " + dot_to_person_ratio + " people</p>");
@@ -392,7 +393,7 @@ function draw_chart(step) {
         circle.enter()
             .append('circle')
             .attr('class', 'dot')
-            .attr('r', 5)
+            .attr('r', radius)
             .style('fill', fill)
             .style("opacity", 1)
             .attr('cx', -10)
