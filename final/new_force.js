@@ -53,10 +53,10 @@ var stats =
 {"Disposition":"Unconditional Discharge","Count":6,"Type":"Convicted", 'Position':'Discharged'},
 {"Disposition": "Convicted-Sentence Pending","Count": 25,"Type": "Convicted", 'Position':'SentencePending'},
 {"Disposition":"Diverted and Dismissed","Count":5,"Type":"Dismissed", 'Position': 'Dismissed'},
-//{"Disposition":"Covered by Anotehr Case","Count":176,"Type":"Other", 'Position': 'Other'},
+{"Disposition":"Covered by Another Case","Count":176,"Type":"Other", 'Position': 'Other'},
 {"Disposition":"Conditional Dismissal","Count":1409,"Type":"Dismissed", 'Position': 'Dismissed'},
-{"Disposition":"Unconditional Dismissal","Count":113,"Type":"Dismissed", 'Position': 'Dismissed'}];
-// {"Disposition":"Other","Count":25,"Type":"Other", 'Position': 'Other'},
+{"Disposition":"Unconditional Dismissal","Count":113,"Type":"Dismissed", 'Position': 'Dismissed'},
+{"Disposition":"Other","Count":25,"Type":"Other", 'Position': 'Other'}];
 
 var labels;
 var labels_entered = false;
