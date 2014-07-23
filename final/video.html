@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,100,100italic,700' rel='stylesheet' type='text/css'>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="stylesvideo.css" rel="stylesheet">
+
+
+	<script src = "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src = "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	<title>Marijuana Disposition</title>
+	<style type="text/css">
+		body {
+			font-family: 'Roboto Condensed', sans-serif;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+	</style>
+</head>
+<body>
+	<div class='container'>
+		<div class='headline'>
+			<h1>Marijuana possession, sale charges often dismissed</h1>
+			<hr>
+		</div>	
+		<div class='row'>
+			<div class='buttons col-xs-6 col-xs-offset-3'>
+				<ul class="pager">
+					<li><a id='previous'><span class="glyphicon glyphicon-chevron-left"></span> Previous</a></li>
+						<li>
+							<a id='next'>Next <span class="glyphicon glyphicon-chevron-right"></span></a>
+						</li>
+				</ul>
+			</div>
+		</div>	
+		<div class='row'>
+			<div id='chart_wrapper' class='col-md-6 col-md-offset-3'>
+				<div id='chart'></div>
+			</div>
+		</div>
+	
+		<div class='row-fluid'>
+			<div id='legend-row'></div>
+		</div>
+
+		
+
+
+	</div>
+
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="underscore.js"></script>
+<script src="new_force.js"></script>
+
+</body>
+</html>
