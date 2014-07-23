@@ -74,6 +74,7 @@ function fade(label) {
             })
 }
 function enterLabels() {
+    $('#labels').show();
     stats = _.sortBy(stats, function(num) { return -num.Count });
     var first_half = stats.slice(0,(stats.length/2))
     var second_half = stats.slice((stats.length/2),stats.length)
@@ -111,7 +112,6 @@ function enterLabels() {
                     fade(d.Disposition);
                 }
                 flipper = !flipper;
-                console.log(flipper)
             })
         }
     }
@@ -384,9 +384,9 @@ d3.select('#next')
         else if (active_step == 'step5') {
             active_step = 'step6';
             
-            //$('.narrative').slideUp();
+            $('.narrative').hide();
             enterLabels();
-            
+            $('.narrative').slideDown();
 
             // d3.select('#labels')
             //     .style('display', 'inline-block')
@@ -399,7 +399,7 @@ d3.select('#next')
             // svg
             //   .attr('width', width)
             //   .attr('height', height);
-            $('#labels').slideDown()
+            
             labels_entered = true;
 
             
@@ -440,7 +440,6 @@ d3.select('#previous')
         }
         else if (active_step == 'step6') {
             $('#labels').slideUp();
-            $('.narrative').slideDown();
             active_step = 'step5';
         }
      //   else if (active_step == 'step6') {
