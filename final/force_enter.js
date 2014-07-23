@@ -408,7 +408,8 @@ d3.select('#next')
         else if (active_step == 'step6') {
             active_step = 'step0';
 
-            $('#labels').slideUp();
+            $('.narrative').slideUp(10);
+            $('.narrative').slideDown();
             $('#previous').hide()
         }
         draw_chart(active_step);
