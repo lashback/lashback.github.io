@@ -38,6 +38,9 @@
 			display:inline-block;
 			
 		}
+		#labels th {
+			padding:5px;
+		}
 		#labels tr {
 			border-bottom: 1px solid #ccc;
 		}
@@ -150,4 +153,13 @@
 		}
 		#container {
 			width:100%;
+		}
+
+		@media (max-width:1000px) {
+			.narrative h3{
+				font-size: 1.2em;
+			}
+			.narrative span {
+				font-size: 1.4em;
+			}
 		}
