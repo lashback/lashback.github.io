@@ -1,4 +1,4 @@
-/*jslint browser: true, sloppy: true, white: true */
+/*jslint browser: true, sloppy: true, white: true, quotes: false*/
 // jquery's not on the page, so we're going to load this last...
 var id = 'chart_wrapper';
 var element = document.getElementById(id);
@@ -74,18 +74,21 @@ function fade(label) {
             })
 }
 function enterLabels() {
-    stats = _.sortBy(stats, function(num) { return -num.Count })
-    
-    if (!labels_entered) {
-    labels = d3.select("#labels").select('tbody').selectAll("tr")
-        .data(stats);
-      labels.enter().append("tr")
+    stats = _.sortBy(stats, function(num) { return -num.Count });
+    var first_half = stats.slice(0,(stats.length/2))
+    var second_half = stats.slice((stats.length/2),stats.length)
+
+    function makeit(data, id) {
+
+    labels = d3.select(id).select('tbody').selectAll('tr')
+        .data(data);
+      labels.enter().append('tr')
         .on('mouseover', function(d) {
             d3.selectAll('tr').classed('active', false);
             d3.select(this).classed('active', true);
             fade(d.Disposition);
          })
-        .on('mouseout', function(d){
+        .on('mouseout', function(d) {
             d3.selectAll('tr').classed('active', false);
             circle
                 .transition()
@@ -111,8 +114,13 @@ function enterLabels() {
                 console.log(flipper)
             })
         }
-        
- }};
+    }
+
+    if (!labels_entered) {
+        makeit(first_half, '#table1');
+        makeit(second_half, '#table2');
+    }
+}
 
 
 function make_data() {
@@ -375,18 +383,32 @@ d3.select('#next')
         }
         else if (active_step == 'step5') {
             active_step = 'step6';
-            $('.narrative').slideUp();
+            
+            //$('.narrative').slideUp();
             enterLabels();
+            
+
+            // d3.select('#labels')
+            //     .style('display', 'inline-block')
+            //     .style('width', '40%')
+            // d3.select('#chart')
+            //     .style('display', 'inline-block')
+            //     .style('width', '40%')
+            // container_width = chart.width();
+            // width = container_width - margin.left - margin.right;
+            // svg
+            //   .attr('width', width)
+            //   .attr('height', height);
             $('#labels').slideDown()
             labels_entered = true;
 
             
         }
+
         else if (active_step == 'step6') {
             active_step = 'step0';
 
             $('#labels').slideUp();
-            $('.narrative').slideDown();
             $('#previous').hide()
         }
         draw_chart(active_step);

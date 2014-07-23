@@ -27,13 +27,16 @@
 		#labels {
 			display:none;
 		}
+
 		#labels:hover {
 			cursor:pointer;
 		}
 		
 		#labels table {
-			width:50%;
-			margin: 0 auto;
+			width:49%;
+			padding:10px;
+			display:inline-block;
+			
 		}
 		#labels tr {
 			border-bottom: 1px solid #ccc;
