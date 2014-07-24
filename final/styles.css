@@ -44,7 +44,11 @@
 		#labels tr {
 			border-bottom: 1px solid #ccc;
 		}
-
+		
+		#labels p {
+			font-size: 1.2em;
+			text-align: center;
+		}
 		.annotation-step {
 			display:none;
 		}
