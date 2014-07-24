@@ -86,23 +86,15 @@ function buildDismissalChart() {
         d.date = d.Year;
     });
 
-    var s = 0;
-    var new_data = [];
-    new_data.push(dismissals[s]);
-    console.log(new_data)
     var x,y;
-    var axis = d3.svg.line()
-        .x(function(d) { return x(d.date); })
-        .y(height);
-    var line = d3.svg.line()
-        .interpolate('monotone')
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.Percent); });
-    x = d3.scale.linear().range([0, width - margin2.left - margin2.right]);
-    y = d3.scale.linear().range([height - margin2.bottom - margin2.top, 0]);
+    var x = d3.scale.ordinal()
+        .domain(d3.range(2004,2014))
+        .rangeRoundBands([0, width], .2);
 
-    x.domain([2004, 2013]);
-    y.domain([0,1]);
+    var y = d3.scale.linear()
+    .domain([0, 1])
+    .range([height, 0]);
+
     var xAxis = d3.svg.axis()
         .scale(x)
         .tickFormat(d3.format('d'))
@@ -113,36 +105,28 @@ function buildDismissalChart() {
         .tickFormat(d3.format(".0%"))
         .orient("left");
     svg2.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + (height - margin2.bottom - margin2.top) + ")")
-        .call(xAxis);
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
     svg2.append("g")
         .attr("class", "y axis")
         .call(yAxis)
 
-    var path = svg2.append("path")
-        .datum(new_data)
-        .attr("class", "line")
-        .attr("d", line);
-    tick();
-
-    function tick() {
-        s++;
-        if (s<dismissals.length) {
-            var new_thang = dismissals[s];
-            console.log(new_thang);
-            new_data.push(new_thang);
-
-            path
-                .attr('d', line)
-                .attr('transform', null)
-            .transition()
-                .duration(60)
-                .ease('quad')
-                .each('end', tick);
-            }
-        }
-    }
+    var bar = svg2.selectAll('bar')
+        .data(dismissals)
+        .enter().append('rect')
+            .attr("class", "bar")
+            .attr("x", function(d) { return x(d.Year); })
+            .attr('width', x.rangeBand())
+            .attr('y', height)
+            .attr('height', 0)
+            
+    bar.transition()
+        .duration(200)
+        .delay(function(d, i) { return i * 200; })
+        .attr("y", function(d) { return y(d.Percent); })
+        .attr("height", function(d) { return height - y(d.Percent); });
+      }
 }
 
 var labels;
@@ -471,11 +455,8 @@ d3.select('#next')
         }
         else if (active_step == 'step5') {
             active_step = 'step6';
-            
-            $('.narrative').hide();
-            enterLabels();
-            $('.narrative').slideDown();
-
+            buildDismissalChart();
+            chart_entered = true; 
             // d3.select('#labels')
             //     .style('display', 'inline-block')
             //     .style('width', '40%')
@@ -488,19 +469,23 @@ d3.select('#next')
             //   .attr('width', width)
             //   .attr('height', height);
             
-            labels_entered = true;   
+            
         }
 
         else if (active_step == 'step6') {
             active_step = 'step7';
-            buildDismissalChart();
-            chart_entered = true; 
+            $('#dismissed').slideUp();
+            $('.narrative').hide();
+            enterLabels();
+            labels_entered = true;   
+            $('.narrative').slideDown();
+
+            
         }
 
         else if (active_step == 'step7') {
-
             active_step = 'step0';
-            $('#dismissed').slideUp();
+            
             $('#previous').hide()
 
         }
@@ -532,13 +517,13 @@ d3.select('#previous')
             active_step = 'step4';
         }
         else if (active_step == 'step6') {
-            $('#labels').slideUp();
+            $('#dismissed').slideUp();
+
             active_step = 'step5';
         }
 
         else if (active_step == 'step7') {
-            $('#dismissed').slideUp();
-            $('#labels').slideDown();
+            $('#labels').slideUp();
             active_step = 'step6';
         }
 

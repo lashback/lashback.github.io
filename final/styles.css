@@ -180,3 +180,7 @@
 		  stroke: #3C9455;
 		  stroke-width: 5px;
 		}
+
+		.bar {
+			fill: #3C9455;
+		}
