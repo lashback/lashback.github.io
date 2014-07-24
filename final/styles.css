@@ -166,3 +166,17 @@
 				font-size: 1.4em;
 			}
 		}
+		.axis path,
+		.axis line {
+			fill:none;
+		}
+
+		.x.axis path {
+		  display: none;
+		}
+
+		.line {
+		  fill: none;
+		  stroke: #3C9455;
+		  stroke-width: 5px;
+		}
