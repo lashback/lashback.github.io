@@ -53,10 +53,33 @@ var stats =
 {"Disposition":"Unconditional Discharge","Count":6,"Type":"Convicted", 'Position':'Discharged'},
 {"Disposition": "Convicted-Sentence Pending","Count": 25,"Type": "Convicted", 'Position':'SentencePending'},
 {"Disposition":"Diverted and Dismissed","Count":5,"Type":"Dismissed", 'Position': 'Dismissed'},
-//{"Disposition":"Covered by Anotehr Case","Count":176,"Type":"Other", 'Position': 'Other'},
+{"Disposition":"Covered by Another Case","Count":176,"Type":"Other", 'Position': 'Other'},
 {"Disposition":"Conditional Dismissal","Count":1409,"Type":"Dismissed", 'Position': 'Dismissed'},
-{"Disposition":"Unconditional Dismissal","Count":113,"Type":"Dismissed", 'Position': 'Dismissed'}];
-// {"Disposition":"Other","Count":25,"Type":"Other", 'Position': 'Other'},
+{"Disposition":"Unconditional Dismissal","Count":113,"Type":"Dismissed", 'Position': 'Dismissed'},
+{"Disposition":"Other","Count":25,"Type":"Other", 'Position': 'Other'}
+];
+
+var dismissals = [{"Percent":0.5317258883,"Year":2004},
+{"Percent":0.5299710624,"Year":2005},
+{"Percent":0.5015604102,"Year":2006},
+{"Percent":0.4935389746,"Year":2007},
+{"Percent":0.4807953005,"Year":2008},
+{"Percent":0.522131888,"Year":2009},
+{"Percent":0.5028985507,"Year":2010},
+{"Percent":0.4916488223,"Year":2011},
+{"Percent":0.5179467387,"Year":2012},
+{"Percent":0.5668151448,"Year":2013}]
+
+
+// function buildDismissalChart() {
+//     var dismissalChart = d3.select('#dismissed');
+//     var svg2 = dismissalChart.append('svg')
+//         .attr('width', width)
+//         .attr('height', height);
+//         .
+
+
+// }
 
 var labels;
 var labels_entered = false;
@@ -154,15 +177,15 @@ function fill(d) {
     if (active_step == 'step0') {
         return default_color;
     }
-    if (active_step == 'step1') {
-        if (d.Type == 'Convicted') {
-            return '#FF6F22';
-            }
-        else if (d.Type == 'Other') {
-            return '#0D1C33';
-            }
-        else return default_color;
-        }
+    // if (active_step == 'step1') {
+    //     if (d.Type == 'Convicted') {
+    //         return '#FF6F22';
+    //         }
+    //     else if (d.Type == 'Other') {
+    //         return '#0D1C33';
+    //         }
+    //     else return default_color;
+    //     }
     else {
             if (d.Position == 'Prison') {
                 return '#FF6F22';
