@@ -403,6 +403,8 @@ d3.select('#next')
         //this should just iterate through an array
         if (active_step == 'step0') {
             $('#previous').show()
+            $("#next").show()
+            $('#startOver').hide()
             active_step = 'step1';
         }
         else if (active_step == 'step1') {
@@ -422,9 +424,8 @@ d3.select('#next')
             active_step = 'step6';
             enterLabels();
             $('#previous').hide()
-            $("#next").html(function() {
-                return "Start over";
-            }) 
+            $("#next").hide()
+            $('#startOver').show()
             // d3.select('#labels')
             //     .style('display', 'inline-block')
             //     .style('width', '40%')
@@ -437,24 +438,26 @@ d3.select('#next')
             //   .attr('width', width)
             //   .attr('height', height);
             
-            labels_entered = true;
-
-            
-        }
-
-        else if (active_step == 'step6') {
-            active_step = 'step0';
-            $("#next").html(function() {
-                return "Next <span class='glyphicon glyphicon-chevron-right'></span>";
-            })
-            
+            labels_entered = true;            
         }
         draw_chart(active_step);
         switchStep(active_step);
         switchAnnotation(active_step);
 
     });
+d3.select('#startOver')
+    .on('click', function(e) {
+        active_step = 'step0';
 
+            $('#previous').toggle()
+            $("#next").toggle()
+            $('#startOver').toggle()
+
+
+        draw_chart(active_step);
+        switchStep(active_step);
+        switchAnnotation(active_step);
+    })
 d3.select('#previous')
     .on('click', function(e) {
         
