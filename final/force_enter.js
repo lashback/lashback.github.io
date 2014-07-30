@@ -6,7 +6,6 @@ var color = d3.scale.category10();
 var mobile_threshold = 500;
 
 var margin = { top: 10, right: 10, bottom: 10, left: 10 };
-var margin2 = { top: 20, right: 20, bottom: 20, left: 40 };
 var id = 'chart_wrapper';
 
 var chart = $('#chart');
@@ -72,72 +71,24 @@ var dismissals = [{"Percent":0.5317258883,"Year":2004},
 {"Percent":0.5668151448,"Year":2013}]
 
 
-function buildDismissalChart() {
-    $('#dismissed').slideDown();
-    if (!chart_entered){
-    var dismissalChart = d3.select('#dismissed');
-    var svg2 = dismissalChart.append('svg')
-        .attr('width', width+margin2.left+margin2.right)
-        .attr('height', height + margin2.top+margin2.bottom)
-      .append('g')
-        .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
-    dismissals.forEach(function(d) {
-        d.Percent = +d.Percent;
-        d.date = d.Year;
-    });
+// function buildDismissalChart() {
+//     var dismissalChart = d3.select('#dismissed');
+//     var svg2 = dismissalChart.append('svg')
+//         .attr('width', width)
+//         .attr('height', height);
+//         .
 
-    var x,y;
-    var x = d3.scale.ordinal()
-        .domain(d3.range(2004,2014))
-        .rangeRoundBands([0, width], .2);
 
-    var y = d3.scale.linear()
-    .domain([0, 1])
-    .range([height, 0]);
-
-    var xAxis = d3.svg.axis()
-        .scale(x)
-        .tickFormat(d3.format('d'))
-        .orient("bottom");
-    var yAxis = d3.svg.axis()
-        .scale(y)
-        .ticks(3)
-        .tickFormat(d3.format(".0%"))
-        .orient("left");
-    svg2.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
-    svg2.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
-
-    var bar = svg2.selectAll('bar')
-        .data(dismissals)
-        .enter().append('rect')
-            .attr("class", "bar")
-            .attr("x", function(d) { return x(d.Year); })
-            .attr('width', x.rangeBand())
-            .attr('y', height)
-            .attr('height', 0)
-            
-    bar.transition()
-        .duration(200)
-        .delay(function(d, i) { return i * 200; })
-        .attr("y", function(d) { return y(d.Percent); })
-        .attr("height", function(d) { return height - y(d.Percent); });
-      }
-}
+// }
 
 var labels;
 var labels_entered = false;
-var chart_entered = false;
 var format = d3.format(",");
 function fade(label) {   
     circle
         .transition()    
             .style("opacity", function(d) {
-                if (d.Disposition == label) {
+                if (d.Position == label) {
                     return 1; 
                 } 
                 else {
@@ -146,51 +97,65 @@ function fade(label) {
             })
 }
 function enterLabels() {
-    $('#labels').show();
-    stats = _.sortBy(stats, function(num) { return -num.Count });
-    var first_half = stats.slice(0,(stats.length/2))
-    var second_half = stats.slice((stats.length/2),stats.length)
-
+    var processed_stats = _(stats).groupBy('Position');
+    console.log(processed_stats);
+    var out = _(processed_stats).map(function(g, key) {
+        return {
+            Position: key,
+            Count: _(g).reduce(function(m,x) {
+                return m + x.Count;
+            }, 0)
+        }
+    })
+    console.log(out)
+    processed_stats = _.sortBy(out, function(num) { return -num.Count });
+    console.log(processed_stats);
+    var first_half = processed_stats.slice(0,(processed_stats.length/2))
+    var second_half = processed_stats.slice((processed_stats.length/2),processed_stats.length)
+    console.log(first_half);
+    console.log(second_half);
     function makeit(data, id) {
-
-    labels = d3.select(id).select('tbody').selectAll('tr')
-        .data(data);
-      labels.enter().append('tr')
-        .on('mouseover', function(d) {
-            d3.selectAll('tr').classed('active', false);
-            d3.select(this).classed('active', true);
-            fade(d.Disposition);
-         })
-        .on('mouseout', function(d) {
-            d3.selectAll('tr').classed('active', false);
-            circle
-                .transition()
-                .style('opacity', 1);
-        })
-        .html(function(d) { return ("<td><span class='" +d.Position+ "'>●</span></td><td>" + format(d.Count) + "</td><td>" + d.Disposition + "</td>") })
-        .style("opacity", 1e-6)
-          .transition()
-          .duration(1000)
-          .style("opacity", 1);
-        if (container_width < mobile_threshold) {
-            var flipper = false;
-            labels.on('click', function(d){
+        labels = d3.select(id).select('tbody').selectAll('tr')
+            .data(data);
+          labels.enter().append('tr')
+            .on('mouseover', function(d) {
+                d3.selectAll('tr').classed('active', false);
+                d3.select(this).classed('active', true);
+                fade(d.Position);
+             })
+            .on('mouseout', function(d) {
+                d3.selectAll('tr').classed('active', false);
                 circle
                     .transition()
                     .style('opacity', 1);
-                d3.selectAll('tr').classed('active', false);
-                if (flipper == false) {
-                    d3.select(this).classed('active', true);
-                    fade(d.Disposition);
-                }
-                flipper = !flipper;
             })
-        }
+            .html(function(d) { return ("<td><span class='" +d.Position+ "'>●</span></td><td>" + format(d.Count) + "</td><td>" + d.Position + "</td>") })
+            .style("opacity", 1e-6)
+              .transition()
+              .duration(2000)
+              .style("opacity", 1);
+            if (container_width < mobile_threshold) {
+                var flipper = false;
+                labels.on('click', function(d){
+                    circle
+                        .transition()
+                        .style('opacity', 1);
+                    d3.selectAll('tr').classed('active', false);
+                    if (flipper == false) {
+                        d3.select(this).classed('active', true);
+                        fade(d.Position);
+                    }
+                    flipper = !flipper;
+                })
+            }
     }
 
     if (!labels_entered) {
         makeit(first_half, '#table1');
         makeit(second_half, '#table2');
+    }
+    else {
+        $("#labels").show();
     }
 }
 
@@ -222,41 +187,42 @@ function make_focii(data, step) {
 
 var active_step = 'step0';
 function fill(d) {
-    var default_color = '#3C9455';
+    var default_color = '#7B9984';
     if (active_step == 'step0') {
         return default_color;
     }
-    // if (active_step == 'step1') {
-    //     if (d.Type == 'Convicted') {
-    //         return '#FF6F22';
-    //         }
-    //     else if (d.Type == 'Other') {
-    //         return '#0D1C33';
-    //         }
-    //     else return default_color;
-    //     }
+     if (active_step == 'step1') {
+         if (d.Type == 'Convicted') {
+             return '#7F3ECC';
+             }
+         else if (d.Type == 'Other') {
+             return '#7B9984';
+             }
+         else return '#3C9455';
+         
+         }
     else {
             if (d.Position == 'Prison') {
-                return '#FF6F22';
+                return '#7F3ECC';
             }
             else if (d.Position == 'Jail')
                 {
-                return '#DB5F4B';
+                return '#7F3ECC';
             }
             else if (d.Position == 'Probation') {
-                return '#D58811'
+                return '#E7A7FF'
             }
             else if (d.Position == 'Fine') {
-                return '#D9984F';
+                return '#64A34C';
             }
             else if (d.Position == 'Discharged') {
-                return '#3E4237';
+                return '#3C9455';
             }
             else if (d.Position == 'SentencePending') {
-                return '#AAA';
+                return '#7B9984';
             }   
             else if (d.Position == 'Other') {
-                return '#AAA';
+                return '#7B9984';
             }
     }
     return default_color;
@@ -264,9 +230,8 @@ function fill(d) {
 
 function filter_data(data) {
         var filtered;
-        if (active_step == 'step0' || active_step == 'step1' || active_step == 'step6' || active_step == 'step7') {
+        if (active_step == 'step0' || active_step == 'step1' || active_step == 'step6') {
             filtered = data;
-
         }
         else if (active_step == 'step2') {
             filtered = _.filter(data, function(d) {
@@ -455,8 +420,11 @@ d3.select('#next')
         }
         else if (active_step == 'step5') {
             active_step = 'step6';
-            buildDismissalChart();
-            chart_entered = true; 
+            enterLabels();
+            $('#previous').hide()
+            $("#next").html(function() {
+                return "Start over";
+            }) 
             // d3.select('#labels')
             //     .style('display', 'inline-block')
             //     .style('width', '40%')
@@ -469,25 +437,17 @@ d3.select('#next')
             //   .attr('width', width)
             //   .attr('height', height);
             
+            labels_entered = true;
+
             
         }
 
         else if (active_step == 'step6') {
-            active_step = 'step7';
-            $('#dismissed').slideUp();
-            $('.narrative').hide();
-            enterLabels();
-            labels_entered = true;   
-            $('.narrative').slideDown();
-
-            
-        }
-
-        else if (active_step == 'step7') {
             active_step = 'step0';
+            $("#next").html(function() {
+                return "Next <span class='glyphicon glyphicon-chevron-right'></span>";
+            })
             
-            $('#previous').hide()
-
         }
         draw_chart(active_step);
         switchStep(active_step);
@@ -517,16 +477,14 @@ d3.select('#previous')
             active_step = 'step4';
         }
         else if (active_step == 'step6') {
-            $('#dismissed').slideUp();
+            $("#labels").hide()
 
+                
             active_step = 'step5';
         }
-
-        else if (active_step == 'step7') {
-            $('#labels').slideUp();
-            active_step = 'step6';
-        }
-
+     //   else if (active_step == 'step6') {
+       //     active_step = 'step0';
+        //}        
         draw_chart(active_step);
         switchStep(active_step);
         switchAnnotation(active_step);

@@ -25,7 +25,7 @@
 			font-size: 1em;
 		}
 		#labels {
-			display:none;
+			
 		}
 
 		#labels:hover {
@@ -64,37 +64,39 @@
 		}
 
 		.Convicted {
-			color:#FF6F22;	
+			color:#7F3ECC;	
 		}
+
+
 		.Discharged {
-			color: #3E4237;
+			color: #3C9455;
 		}
 
 		.Fine {
-			color: #D9984F;
+			color: #64A34C;
 
 		}
 		.Probation {
-			color: #D58811;
+			color: #E7A7FF;
 		}
 		.Jail {
-			color:#515932;
+			color:#7F3ECC;
 		}
 		.Prison {
-			color: #FF6F22;
+			color: #7F3ECC;
 		}
 		.Dismissed {
 			color: #3C9455;
 		}
 		.SentencePending {
-			color: #AAA;
+			color: #7B9984;
 		}
 
-		span.all {
-			color:#3C9455;
+		.all {
+			color:#7B9984;
 		}
-		span.legend {
-			color:#3C9455;
+		.legend {
+			color:#7B9984;
 		}
 		#legend-row {
 			text-align: center;
@@ -131,7 +133,7 @@
 			font-size:1em;
 		}
 		.narrative {
-			height:200px;
+			height:220px;
 		}
 		.narrative-container {
 			height:100%;
