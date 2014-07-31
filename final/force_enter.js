@@ -3,9 +3,9 @@
 var id = 'chart_wrapper';
 var element = document.getElementById(id);
 var color = d3.scale.category10();
-var mobile_threshold = 500;
+var mobile_threshold = 450;
 
-var margin = { top: 10, right: 10, bottom: 10, left: 10 };
+var margin = { top: 20, right: 20, bottom: 20, left: 20 };
 var id = 'chart_wrapper';
 
 var chart = $('#chart');
@@ -25,22 +25,20 @@ if (!is_chrome) {
     ratio_weight = 3;
 }
 
-
-
 if (container_width < mobile_threshold) {
     graphic_aspect_width = 7;
     graphic_aspect_height = 16;
     columns = 1;
     height = 250;
     margin = { top: 10, right: 10, bottom: 10, left: 10 };
-    dot_to_person_ratio = 6;
+    ratio_weight = ratio_weight * 2;
     radius = 3;
     easing = 'linear';
 }
 
 dot_to_person_ratio = dot_to_person_ratio * ratio_weight;
 d3.select('#legend-row')
-    .html("<p><span class='legend'>●</span> " + dot_to_person_ratio + " people</p>");
+    .html("<p> <span class='legend'>●</span> " + dot_to_person_ratio + 'people</p>');
 var width = container_width - margin.left - margin.right;
 
 //we need an 'on resize function.' Got any good listeners?
@@ -170,11 +168,7 @@ function enterLabels() {
 
 
 function make_data() {
-    // random times
     var i = 0;
-    // var weedline = {id: i, 'Disposition': 'leaf', 'Type': 'leaf', 'Position': 'leaf'}
-    // dataset.push(weedline);
-    // i++;
     stats = _.sortBy(stats, function(d) { return d.Count});
     _(stats).each(function(disp, key) {
         var count = Math.ceil((disp.Count) / dot_to_person_ratio); //all of them is like waaaaay too much
@@ -320,7 +314,6 @@ function draw_chart(step) {
             .data(data, function(d) {return d.id;});
         function tick(e) 
         {
-
             var k = .2 * e.alpha; 
             data.forEach(function(d) {
                 var center = foci.All; 
@@ -342,19 +335,15 @@ function draw_chart(step) {
             .charge(-6) // repel
             .gravity(0)
             .size([width, height])
+            .theta(1)
             .on('tick', tick);
 
         if (container_width < mobile_threshold) {
             force
                 .charge(-3);
-
         }
-
         if (!is_chrome) {
-            force
-                //.chargeDistance(50)
-                //.charge(-10)
-                .theta(1);
+        
         }
         force.start();
         
@@ -369,20 +358,15 @@ function draw_chart(step) {
             .attr('cy', -10);
         // update. Transition the color change.
         circle
-            
             .transition()
                 .delay(100)
                 .duration(1000)
                 .style('fill', fill);
-
         // exit
-    
         circle.exit()
-            //first choice: explode!!!        
             .transition()
                 .duration(2000)
                 .ease(easing)
-                //.style("opacity", .5)
                 .attr('cx', function(d){
                     var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
                     return d.cx + (Math.random()*width * plusOrMinus*100);
@@ -391,7 +375,6 @@ function draw_chart(step) {
                     var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
                     return d.cy + (Math.random()* height * plusOrMinus*100);  
                 })
-                //wrapup, remove the nodes. Byebye
             .remove();
     }
 
