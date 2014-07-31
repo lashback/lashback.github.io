@@ -10,7 +10,7 @@ var id = 'chart_wrapper';
 
 var chart = $('#chart');
 var container_width = chart.width();
-
+var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var container_height = element.offsetWidth; //wat. no.
 var graphic_aspect_width = 16;
 var graphic_aspect_height = 7;
@@ -19,7 +19,14 @@ var columns = 3;
 var height = 350;
 var dot_to_person_ratio = 3;
 var radius = 5;
-var easing = 'exp'
+var easing = 'exp';
+var ratio_weight = 1;
+if (!is_chrome) {
+    ratio_weight = 3;
+}
+
+
+
 if (container_width < mobile_threshold) {
     graphic_aspect_width = 7;
     graphic_aspect_height = 16;
@@ -28,8 +35,10 @@ if (container_width < mobile_threshold) {
     margin = { top: 10, right: 10, bottom: 10, left: 10 };
     dot_to_person_ratio = 6;
     radius = 3;
-    easing = 'linear'
+    easing = 'linear';
 }
+
+dot_to_person_ratio = dot_to_person_ratio * ratio_weight;
 d3.select('#legend-row')
     .html("<p><span class='legend'>●</span> " + dot_to_person_ratio + " people</p>");
 var width = container_width - margin.left - margin.right;
@@ -40,7 +49,7 @@ var svg = d3.select('#chart').append('svg')
     .attr('width', width)
     .attr('height', height);
 
-var dataset= [];
+var dataset = [];
 var stats = 
 [
 {"Disposition":"Prison","Count":7,"Type":"Convicted", 'Position': 'Prison'},
@@ -336,7 +345,16 @@ function draw_chart(step) {
             .on('tick', tick);
 
         if (container_width < mobile_threshold) {
-            force.charge(-3);
+            force
+                .charge(-3);
+
+        }
+
+        if (!is_chrome) {
+            force
+                //.chargeDistance(50)
+                //.charge(-10)
+                .theta(1);
         }
         force.start();
         
@@ -346,12 +364,12 @@ function draw_chart(step) {
             .attr('class', 'dot')
             .attr('r', radius)
             .style('fill', fill)
-            .style("opacity", 1)
+            
             .attr('cx', -10)
             .attr('cy', -10);
         // update. Transition the color change.
         circle
-            .style("opacity", 1)
+            
             .transition()
                 .delay(100)
                 .duration(1000)
