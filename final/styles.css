@@ -25,7 +25,9 @@
 			font-size: 1em;
 		}
 		#labels {
+			position:relative;
 			margin:0 auto;
+			text-align: center;
 		}
 
 		#labels:hover {
@@ -33,7 +35,7 @@
 		}
 		
 		#labels table {
-			
+			padding:0 20px;
 			display:inline-block;
 			
 		}

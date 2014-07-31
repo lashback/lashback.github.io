@@ -6,9 +6,7 @@ var color = d3.scale.category10();
 var mobile_threshold = 450;
 
 var margin = { top: 20, right: 20, bottom: 20, left: 20 };
-var id = 'chart_wrapper';
-
-var chart = $('#chart');
+var chart = $('#chart_wrapper');
 var container_width = chart.width();
 var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var container_height = element.offsetWidth; //wat. no.
@@ -38,8 +36,8 @@ if (container_width < mobile_threshold) {
 
 dot_to_person_ratio = dot_to_person_ratio * ratio_weight;
 d3.select('#legend-row')
-    .html("<p> <span class='legend'>●</span> " + dot_to_person_ratio + 'people</p>');
-var width = container_width - margin.left - margin.right;
+    .html("<p> <span class='legend'>●</span> " + dot_to_person_ratio + ' people</p>');
+var width = container_width;
 
 //we need an 'on resize function.' Got any good listeners?
 
@@ -312,11 +310,12 @@ function draw_chart(step) {
         var foci = make_focii(data, step);
         circle = svg.selectAll('.dot')
             .data(data, function(d) {return d.id;});
+        center = foci.All; 
         function tick(e) 
         {
             var k = .2 * e.alpha; 
             data.forEach(function(d) {
-                var center = foci.All; 
+                
                 capture = d;
                 d.y += (center.y - d.y) * k;
                 d.x += (center.x - d.x) * k;
@@ -508,8 +507,8 @@ draw_chart(active_step);
 //
 
 $(window).on("resize", function() {
-    var chart = $('#chart');
+    var chart = $('#chart_wrapper');
     container_width = chart.width();
-    width = container_width - margin.left - margin.right;
+    width = container_width;
     draw_chart(active_step);
 });
