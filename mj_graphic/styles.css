@@ -1,0 +1,313 @@
+		h1, h2 {
+			text-align: center;
+			font-weight: 700;
+		}
+
+
+	
+		h3 {
+			text-align: center;
+		}
+
+		span {
+			font-weight: 700;
+
+		}
+		
+		.active_circle {
+			stroke: 2px #000;
+			fill: #fff;
+		}
+
+		.steppers {
+			float:left;
+			display: inline-block;
+			font-size: 1em;
+		}
+		#labels {
+			margin:0 auto;
+			text-align: center;
+			background-color: rgba(255,255,255, .8);
+
+		}
+
+		#labels:hover {
+			cursor:pointer;
+		}
+		
+		#labels table {
+			padding:0 5px;
+			display:inline-block;
+		}
+		#labels th {
+			padding:5px;
+		}
+		#labels tr {
+			border-bottom: 1px solid #ccc;
+		}
+		
+		#labels p {
+			font-size: 1.2em;
+			text-align: center;
+		}
+		.annotation-step {
+			display:none;
+		}
+
+		.active {
+			
+			background-color: #d9f0d3;
+			
+		}
+		
+		span {
+			font-size: 1.8em;
+		}
+
+		.Convicted {
+			color:#7F3ECC;	
+		}
+
+		.Other, .Sentence {
+			color: #7B9984;
+		}
+		.Discharged {
+			color: #3C9455;
+		}
+
+		.Fine {
+			color: #64A34C;
+
+		}
+		.Probation {
+			color: #E7A7FF;
+		}
+		.Jail {
+			color:#7F3ECC;
+		}
+		.Prison {
+			color: #7F3ECC;
+		}
+		.Dismissed {
+			color: #3C9455;
+		}
+		.SentencePending {
+			color: #7B9984;
+		}
+
+		.all {
+			color:#7B9984;
+		}
+		.legend {
+			color:#7B9984;
+		}
+		#legend-row {
+			text-align: center;
+			bottom:0px;
+			position:fixed;
+			background-color: rbga(255,255,255,.5)
+		}
+
+/*		span.dismissed {
+			color:#7AA25C;
+		}
+		
+		span.convicted {
+			color:#EE9586;
+		}
+		span.jail {
+			color:#D84B2A;
+		}
+		span.discharged{
+			color:#4C4758;
+		}
+		span.prison{
+			color:#8B250D;
+		}
+		span.fine {
+			color:7#mai25A44;
+		}
+		span.probation {
+			color:#58668B;
+		}
+		span.sentencepending {
+			color:#4C4758;
+		}*/
+		.prev {
+			display:none;
+		}
+		.prev, .next {
+			width:60px;	
+			border-radius: 50%;
+			text-align: center;
+			background:#ddd;
+			height:60px;
+			display:inline-block;
+			z-index: 2000;
+		}
+		.prev span, .next span {
+			font-size: 50px;
+			display:block;
+			color: #3C9455;
+			font-weight: bold;
+			line-height: 1.2;
+			
+		}
+
+		.prev span {
+			text-indent: -.2em;
+		}
+
+		#start_wrap {
+			text-align: center;
+			z-index: 2000;
+		}
+
+		#startOver span {
+			font-size: 44px;
+			font-weight: bold;
+			color: #3C9455;
+			line-height: 1.4;
+			width:60px;	
+			height:60px;
+			border-radius: 50%;
+			text-indent: -.05em;
+			background:#ddd;
+			z-index: 2000
+		}
+		
+		#startOver {
+			display:none;
+		}
+		
+
+		.prev:hover, .next:hover, #startOver:hover {
+			text-decoration:none;
+			cursor:pointer;
+			opacity:.6;
+
+		}
+		.prev.disabled, .next.disabled, #startOver:hover {
+			opacity:.3;
+		}
+		.button_wrapper {
+			padding-bottom: 40px;
+		}
+		.button {
+			text-align:center;
+		}
+
+
+
+
+
+		/*.button {
+			width:60px;
+			background: #333;
+			border: none;
+			border-radius: 4px;
+			box-shadow: none;
+			font-size: 38px;
+			font-weight: bold;
+			height: 60px;
+			margin: 0;
+			opacity: 0.86;
+			top: 43%;
+			width: 12px;
+			color: #000;
+			line-height: 1.42857;
+			text-indent: 0;
+			display:inline-block;
+		}*/
+		a {
+			text-decoration: none;
+		}
+		.footnote {
+			color:#777;
+			font-size:1em;
+		}
+	
+		/*make it work with everything. 
+		make svg z-index low
+			So if i'm setting aboslute position
+			what is it absolute relatiev ot
+			fixed is relative to something else
+			it figures out
+			goes up chain to "relative"
+			
+			positon: relative;
+				means where it wants to be.
+			sets position relative to the thignyou want it to be relative to,
+			position absolute;
+			
+			putbutton on each side of the chart. 
+			replay
+			leave previous on the screen..Have next be nex
+	
+		*/
+		#chart {
+			position:absolute;
+			top:0;
+			left:0;
+			z-index: -1000;
+		}
+		#narrative-container {	
+			z-index: 2000;
+			width:100%;
+			background-color: rgba(255,255,255,.3);
+			margin:10px;
+			
+		}
+
+		
+		#legend {
+			border: 1px #eee solid;
+		}
+		
+		h3 {
+			line-height: 1.5;
+		}
+		h4{
+			text-align: center;
+		}
+		.pager a {
+			cursor:pointer;
+			color: #1b7837;
+		}
+		.dot {
+			stroke-width: .5px;
+			stroke: #fff;
+		}
+		#container {
+			width:100%;
+		}
+
+		@media (max-width:1000px) {
+			.labels {
+				font-size: .5em;
+			}
+			.narrative h3{
+				font-size: 1.2em;
+			}
+			.narrative span {
+				font-size: 1.4em;
+			}
+		}
+		.axis path,
+		.axis line {
+			fill:none;
+		}
+
+		.x.axis path {
+		  display: none;
+		}
+
+		.line {
+		  fill: none;
+		  stroke: #3C9455;
+		  stroke-width: 5px;
+		}
+
+		.bar {
+			fill: #3C9455;
+		}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,100,100italic,700' rel='stylesheet' type='text/css'>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="styles.css" rel="stylesheet">
+	<link href="css/font-awesome.css" rel="stylesheet">
+
+
+<script src = "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src = "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	<title>Marijuana Disposition</title>
+	<style type="text/css">
+		body {
+			font-family: 'Roboto Condensed', sans-serif;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+	</style>
+</head>
+<body>
+	<div class='container'>
+		<div class='headline'>
+			<h1>More than half of LI marijuana cases were dismissed last year</h1>
+			<hr>
+		</div>
+		
+		
+		<div class='row'>
+			<div class='button col-md-3 col-xs-6'>
+				<a id='previous' class='prev button'><span class="fa fa-angle-left"></span></a>	
+			</div>
+
+			<div class='button col-md-3 col-md-push-6 col-xs-6'>
+					<a id='next' class='next button'><span class="fa fa-angle-right"></span></a>
+					<div id='start_wrap'>
+						<a id='startOver' class='button'><span class="fa fa-repeat"></span></a>
+					</div>
+			</div>
+	
+			<div class='col-md-6 col-md-pull-3 col-xs-12'>
+				<div class='narrative'>
+					<div id='narrative-container'>
+						<div class='annotation-step' id='step0-annotation'>
+							<h3>In 2013, <span class='all'>2,694 people</span> were brought up on marijuana-related charges.</h3>
+						</div>
+						<div class='annotation-step' id='step1-annotation'>
+							<h3>But in 2013, 57% were <span class='Dismissed'>dismissed</span> ultimately in court. 36% were 
+							<span class='Convicted'>convicted.</span></h3>
+						</div>
+
+						<div class='annotation-step' id='step2-annotation'>
+							<h3>Of those convicted, most <span class='Fine'>faced a fine.</span></h3>
+						</div>
+
+						<div class='annotation-step' id='step3-annotation'>
+							<h3>Another <span class='Discharged'>94 were discharged</span> as part of the sentence.</h3>
+						</div>
+
+						<div class='annotation-step' id='step4-annotation'>
+							<h3>...And 17 people were put <span class='Probation'>on probation</span> or <span class='SentencePending'>await sentencing.</span></h3>
+						</div>
+						<div class='annotation-step' id='step5-annotation'>
+							<h3>And in the end, only 5.38% of all who were arrested found themselves <span class='Prison'>behind bars.</span></h3>
+						</div>
+
+						<div class='annotation-step' id='step6-annotation'>
+							<div id='labels'>
+								<table id='table1'><thead><tr><th></th><th>People</th><th>Disposition</th></tr></thead>
+								<tbody>
+								</tbody>
+								</table>
+								<table id='table2'><thead><tr><th></th><th>People</th><th>Disposition</th></tr></thead>
+								<tbody>
+								</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div>
+			
+		</div>
+
+		
+		<div id='chart_wrapper'>
+			<div id='chart'></div>
+		</div>
+		
+		<div class='row'>
+			<div id='legend-row'></div>
+		</div>
+		
+	</div>
+
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="underscore.js"></script>
+<script src="force_enter.js"></script>
+<script>marijuana_chart();</script>
+<script>
+
+</script>
+</body>
+</html>
