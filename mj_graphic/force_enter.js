@@ -253,7 +253,6 @@ function marijuana_chart() {
     var data;
     make_data();
     function draw_chart(step) {
-
         svg
             .attr('width', width)
             .attr('height', height);
@@ -303,7 +302,6 @@ function marijuana_chart() {
             .append('circle')
             .attr('class', 'dot')
             .attr('cx', function(d) {
-                
                 var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
                 return (Math.random() * (width / 2) * plusOrMinus * 10);
             })
@@ -315,7 +313,9 @@ function marijuana_chart() {
             .style('fill', fill);
         // update. Transition the color change.
         circle
+            .transition()
             .attr('opacity', 1)
+            .attr('r', radius)
             .transition()
                 .delay(100)
                 .duration(1000)
