@@ -15,7 +15,7 @@ function marijuana_chart() {
         
         columns = 3,
         height = $(window).height(),
-        dot_to_person_ratio = 3,
+        dot_to_person_ratio = 4,
         radius = 5,
         easing = 'quad',
         ratio_weight = 1,
@@ -30,8 +30,9 @@ function marijuana_chart() {
 
     }
     var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+    var is_IE = navigator.userAgent.toLowerCase().indexOf('MSIE') > -1;
     dot_to_person_ratio = dot_to_person_ratio * ratio_weight;
-    if (!is_chrome) {
+    if (!is_chrome && !is_IE) {
         dot_to_person_ratio = 8;
     }    
     var svg = d3.select('#chart').append('svg')
@@ -56,15 +57,13 @@ function marijuana_chart() {
             ratio_weight = 2;
         }
         dot_to_person_ratio = dot_to_person_ratio * ratio_weight;
+        if (!is_chrome && !is_IE) {
+            dot_to_person_ratio = 8;
+        }
     }
-    
     d3.select('#legend-row')
         .html("<p> <span class='legend'>●</span> " + dot_to_person_ratio + ' people</p>');
-
-    //we need an 'on resize function.' Got any good listeners?
-
-    
-
+    //we need an 'on resize function.' Got any good listeners? 
     var dataset = [];
     var stats = [
         {"Disposition":"Prison","Count":7,"Type":"Convicted", 'Position': 'Prison'},
@@ -313,14 +312,15 @@ function marijuana_chart() {
             .style('fill', fill);
         // update. Transition the color change.
         circle
-            .transition()
             .attr('opacity', 1)
             .attr('r', radius)
+            
             .transition()
-                .delay(100)
+                .delay(75)
                 .duration(1000)
                 .style('fill', fill);
         // exit
+
         circle.exit()
             .transition()
                 .duration(100)
@@ -331,10 +331,21 @@ function marijuana_chart() {
                 .ease(easing)
                 .attr('cx', function(d) {
                     var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
-                    //d.x += plusOrMinus*(Math.random() * width);
-                    return d.x + plusOrMinus * (Math.random() * width);
+                    var new_val = d.x + plusOrMinus * (Math.random() * width);
+                    var distance_from_center = (center.x - d.x)
+                    d.x = distance_from_center < 0 ? (d.x += width * 0.01) : (d.x -= d.x * 0.01);
+                    // d.x += (center.x - d.x) * .1;
+                    //pick a corner
+                    // d.x = Math.random() < 0.5 ? (width / 4) : (3 * width / 4);
+                    // d.x = center.x + (plusOrMinus * (Math.random() * 30));
+                    return new_val;
                 })
                 .attr('cy', function(d) {
+                    var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+                    var distance_from_center = (center.y - d.y)
+                    d.y = distance_from_center < 0 ? (d.y += height * 0.01) : (d.y -= height * 0.01);
+                    // d.y = Math.random() < 0.5 ? (height / 4) : (3 * height / 4);
+                    // d.y = center.y + (plusOrMinus * (Math.random() * 30));
                     return (Math.random() * height) - height;
                 })
             .remove();
@@ -393,12 +404,13 @@ function marijuana_chart() {
             active_step = 'step' + (--step_no);
             if (step_no === 0) {
                 $('#previous').hide();
-                $('#next').show();
+                
             }
             else if (step_no === 1) {
                 $('#startOver').hide();
             } else if (step_no === 5) {
                 $('#startOver').hide();
+                $('#next').show();
             }
             draw_chart(active_step);
             switchStep(active_step);
