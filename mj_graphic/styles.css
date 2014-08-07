@@ -45,6 +45,11 @@
 		#labels tr {
 			border-bottom: 1px solid #ccc;
 		}
+		#labels td {
+			padding:3px;
+			text-align: right;
+			height: 46px;
+		}
 		
 		#labels p {
 			font-size: 1.2em;
@@ -63,94 +68,78 @@
 		span {
 			font-size: 1.8em;
 		}
+		.highlight {
+			color:#0075c0;
+		}
 
 		.Convicted {
-			color:#7F3ECC;	
+			color:#68C3FF;	
 		}
 
-		.Other, .Sentence {
-			color: #7B9984;
+		.Other {
+			color: #AAA;
+		}
+
+		.Covered {
+			color: #AAA;	
 		}
 		.Discharged {
-			color: #3C9455;
+			color: #d0d9ff;
 		}
 
 		.Fine {
-			color: #64A34C;
+			color: #afbfff;
 
 		}
 		.Probation {
-			color: #E7A7FF;
+			color: #738ffe;
 		}
 		.Jail {
-			color:#7F3ECC;
+			color:#0075c0;
 		}
 		.Prison {
-			color: #7F3ECC;
+			color: #024687;
 		}
 		.Dismissed {
-			color: #3C9455;
+			color: #8bc34a;
 		}
-		.SentencePending {
-			color: #7B9984;
+		.Sentence {
+			color: #68C3FF;
 		}
 
 		.all {
-			color:#7B9984;
+			color:#8bc34a;
 		}
 		.legend {
-			color:#7B9984;
+			color:#8bc34a;
 		}
 		#legend-row {
-			text-align: center;
+			text-align: left;
 			bottom:0px;
 			position:fixed;
-			background-color: rbga(255,255,255,.5)
+			background-color: rbga(255,255,255,.5);
+			color:#555;
+			max-width:200px;
 		}
 
-/*		span.dismissed {
-			color:#7AA25C;
-		}
-		
-		span.convicted {
-			color:#EE9586;
-		}
-		span.jail {
-			color:#D84B2A;
-		}
-		span.discharged{
-			color:#4C4758;
-		}
-		span.prison{
-			color:#8B250D;
-		}
-		span.fine {
-			color:7#mai25A44;
-		}
-		span.probation {
-			color:#58668B;
-		}
-		span.sentencepending {
-			color:#4C4758;
-		}*/
 		.prev {
 			display:none;
 		}
 		.prev, .next {
-			width:60px;	
+			width:40px;	
 			border-radius: 50%;
 			text-align: center;
 			background:#ddd;
-			height:60px;
+			height:40px;
 			display:inline-block;
 			z-index: 2000;
 		}
 		.prev span, .next span {
-			font-size: 50px;
+			font-size: 40px;
 			display:block;
-			color: #3C9455;
+			color: #8bc34a;
 			font-weight: bold;
-			line-height: 1.2;
+			line-height: 1.0;
 			
 		}
 
@@ -164,12 +153,12 @@
 		}
 
 		#startOver span {
-			font-size: 44px;
+			font-size: 30px;
 			font-weight: bold;
-			color: #3C9455;
-			line-height: 1.4;
-			width:60px;	
-			height:60px;
+			color: #8bc34a;
+			line-height: 1.42;
+			width:40px;	
+			height:40px;
 			border-radius: 50%;
 			text-indent: -.05em;
 			background:#ddd;
@@ -225,8 +214,13 @@
 		.footnote {
 			color:#777;
 			font-size:1em;
+			background-color: rgba(255,255,255, .6);
 		}
-	
+		/*.source {
+			text-align: left;
+			color:#666;
+			max-width: 150px;
+		}*/
 		/*make it work with everything. 
 		make svg z-index low
 			So if i'm setting aboslute position
@@ -254,7 +248,7 @@
 		#narrative-container {	
 			z-index: 2000;
 			width:100%;
-			background-color: rgba(255,255,255,.3);
+			background-color: rgba(255,255,255,.6);
 			margin:10px;
 			
 		}
@@ -274,10 +268,13 @@
 			cursor:pointer;
 			color: #1b7837;
 		}
+
 		.dot {
-			stroke-width: .5px;
-			stroke: #fff;
-		}
+			stroke:#fff;
+			stroke-width:.5px;
+
+		}	
+	
 		#container {
 			width:100%;
 		}
@@ -292,6 +289,12 @@
 			.narrative span {
 				font-size: 1.4em;
 			}
+		
+		}
+
+
+
+
 		}
 		.axis path,
 		.axis line {
@@ -301,6 +304,7 @@
 		.x.axis path {
 		  display: none;
 		}
+
 
 		.line {
 		  fill: none;

@@ -57,29 +57,100 @@ function marijuana_chart() {
             ratio_weight = 2;
         }
         dot_to_person_ratio = dot_to_person_ratio * ratio_weight;
+        
         if (!is_chrome && !is_IE) {
             dot_to_person_ratio = 8;
         }
     }
     d3.select('#legend-row')
-        .html("<p> <span class='legend'>●</span> " + dot_to_person_ratio + ' people</p>');
+        .html("<p><span class='legend'>●</span> represents about " + dot_to_person_ratio + ' people</p><p class="source">Source: New York State Division of Criminal Justices Services (as of January 2014)</p>');
     //we need an 'on resize function.' Got any good listeners? 
     var dataset = [];
     var stats = [
-        {"Disposition":"Prison","Count":7,"Type":"Convicted", 'Position': 'Prison'},
-        {"Disposition":"Jail","Count":79,"Type":"Convicted", 'Position': 'Jail'},
-        {"Disposition":"Jail and Probation","Count":7,"Type":"Convicted", 'Position': 'Jail'},
-        {"Disposition":"Time Served","Count":52,"Type":"Convicted", 'Position': 'Jail'},
-        {"Disposition":"Probation","Count":17,"Type":"Convicted", 'Position': 'Probation'},
-        {"Disposition":"Fine","Count":685,"Type":"Convicted", 'Position': 'Fine'},
-        {"Disposition":"Conditional Discharge","Count":88,"Type":"Convicted", 'Position': 'Discharged'},
-        {"Disposition":"Unconditional Discharge","Count":6,"Type":"Convicted", 'Position':'Discharged'},
-        {"Disposition": "Convicted-Sentence Pending","Count": 25,"Type": "Convicted", 'Position':'Sentence Pending'},
-        {"Disposition":"Diverted and Dismissed","Count":5,"Type":"Dismissed", 'Position': 'Dismissed'},
-        {"Disposition":"Covered by Another Case","Count":176,"Type":"Other", 'Position': 'Other'},
-        {"Disposition":"Conditional Dismissal","Count":1409,"Type":"Dismissed", 'Position': 'Dismissed'},
-        {"Disposition":"Unconditional Dismissal","Count":113,"Type":"Dismissed", 'Position': 'Dismissed'},
-        {"Disposition":"Other","Count":25,"Type":"Other", 'Position': 'Other'}
+        {
+            "Disposition":"Prison",
+            "Count":7,
+            "Type":"Convicted", 
+            'Position': 'Jail and prison'
+        },
+        {
+            "Disposition":"Jail",
+            "Count":79,
+            "Type":"Convicted",
+            'Position': 'Jail and prison'
+        },
+        {
+            "Disposition":"Jail and Probation",
+            "Count":7,
+            "Type":"Convicted",
+            'Position': 'Jail and prison'
+        },
+        {
+            "Disposition":"Time Served",
+            "Count":52,
+            "Type":"Convicted",
+            'Position': 'Jail and prison'
+        },
+        {
+            "Disposition":"Probation",
+            "Count":17,
+            "Type":"Convicted",
+            'Position': 'Probation'
+        },
+        {
+            "Disposition":"Fine",
+            "Count":685,
+            "Type":"Convicted",
+            'Position': 'Fine'
+        },
+        {
+            "Disposition":"Conditional Discharge",
+            "Count":88,
+            "Type":"Convicted",
+            'Position': 'Discharged'
+        },
+        {
+            "Disposition":"Unconditional Discharge",
+            "Count":6,
+            "Type":"Convicted",
+            'Position':'Discharged'
+        },
+        {
+            "Disposition": "Convicted-Sentence Pending",
+            "Count": 25,
+            "Type": "Convicted",
+            'Position':'Sentence Pending'
+        },
+        {
+            "Disposition":"Diverted and Dismissed",
+            "Count":5,
+            "Type":"Dismissed",
+            'Position': 'Dismissed'
+        },
+        {
+            "Disposition":"Covered by Another Case",
+            "Count":176,
+            "Type":"Other",
+            'Position': 'Covered by<br> another case'
+        },
+        {
+            "Disposition":"Conditional Dismissal",
+            "Count":1409,
+            "Type":"Dismissed",
+            'Position': 'Dismissed'
+        },
+        {
+            "Disposition":"Unconditional Dismissal",
+            "Count":113,
+            "Type":"Dismissed",
+            'Position': 'Dismissed'
+        },
+        {
+            "Disposition":"Other",
+            "Count":25,
+            "Type":"Convicted",
+            'Position': 'Other'
+        }
     ];
 
     var dismissals = [
@@ -101,12 +172,89 @@ function marijuana_chart() {
     function fade(label) {
         circle.transition()
             .style("opacity", function(d) {
-                if (d.Position == label) { return 1; }
+                if (d.Position === label) { return 1; }
                 else { return 0.1; }
             });
     }
+
+    function highlight(label) {
+        // var label_class_string = '.' + label;
+        // var span = d3.selectAll(label_class_string);
+        // console.log(span);
+        // span
+        //     .style('text-shadow', '-2px 2px 0 rgba(0, 0, 0, 0.29)');
+        
+        //while not pressed, repeat this guy.
+        // var defs = svg.append("defs");
+
+        // // create filter with id #drop-shadow
+        // // height=130% so that the shadow is not clipped
+        // var filter = defs.append("filter")
+        //     .attr('x', "-50%")
+        //     .attr('y', "-50%")
+        //     .attr("id", "drop-shadow")
+        //     .attr('width', "200%")
+        //     .attr("height", "200%");
+
+        // // SourceAlpha refers to opacity of graphic that this filter will be applied to
+        // // convolve that with a Gaussian with standard deviation 3 and store result
+        // // in blur
+        // filter.append("feGaussianBlur")
+        //     .attr("in", "SourceAlpha")
+        //     .attr("stdDeviation", 2)
+        //     .attr("result", "blur");
+
+        // // translate output of Gaussian blur to the right and downwards with 2px
+        // // store result in offsetBlur
+        // filter.append("feOffset")
+        //     .attr("result", "offsetBlur");
+
+        // // overlay original SourceGraphic over translated blurred opacity by using
+        // // feMerge filter. Order of specifying inputs is important!
+        // var feMerge = filter.append("feMerge");
+
+        // feMerge.append("feMergeNode")
+        //     .attr("in", "offsetBlur")
+        // feMerge.append("feMergeNode")
+        //     .attr("in", "SourceGraphic");
+        
+        if (active_step !== 'step0' && active_step !== 'step1' && active_step !== 'step7') {
+            var opposite = circle.filter(function(d) { 
+                var flag = true;
+                label.forEach(function(key) {
+                    if (d.Position === key) {
+                       flag = false; 
+                    }
+                });            
+                return !flag;
+            });
+            opposite
+                // .style("filter", "url(#drop-shadow)")
+                .transition()
+                    .delay(100)
+                    .duration(1000)
+                    .style('fill', '#0075c0');
+            // var primary = circle.filter(function(d) { return d.Position === label });
+            // primary
+            //     .transition()
+            //     .delay(200)
+            //         .duration(2000)
+            //         .style('fill', '#ffa000')
+        }
+            
+          //.transition()
+           // .delay(1000)
+           // .duration(2000)
+               
+
+
+
+        //selection
+                
+        }
     
     function enterLabels() {
+
         var processed_stats = _(stats).groupBy('Position');
         var out = _(processed_stats).map(function(g, key) {
             return {
@@ -126,6 +274,10 @@ function marijuana_chart() {
                 .data(data);
             labels.enter().append('tr')
                 .on('mouseover', function(d) {
+                    circle
+                        .transition()
+                        .duration(100)
+                        .style('opacity', 1);
                     d3.selectAll('tr').classed('active', false);
                     d3.select(this).classed('active', true);
                     fade(d.Position);
@@ -136,7 +288,7 @@ function marijuana_chart() {
                         .transition()
                         .style('opacity', 1);
                 })
-                .html(function(d) { return "<td><span class='" +d.Position+ "'>●</span></td><td>" + format(d.Count) + "</td><td>" + d.Position + "</td>"; })
+                .html(function(d) { return "<td><span class='" +d.Position+ "'>●</span></td><td><strong>" + format(d.Count) + "</strong></td><td>" + d.Position + "</td>"; })
                 .style("opacity", 1e-6)
                     .transition()
                       .duration(2000)
@@ -148,9 +300,7 @@ function marijuana_chart() {
                     circle
                         .transition()
                         .style('opacity', 1);
-                    
                     d3.selectAll('tr').classed('active', false);
-                    
                     if (flipper === false) {
                         d3.select(this).classed('active', true);
                         fade(d.Position);
@@ -176,7 +326,7 @@ function marijuana_chart() {
         var i = 0;
         stats = _.sortBy(stats, function(d) { return d.Count; });
         _(stats).each(function(disp, key) {
-            var count = Math.ceil((disp.Count) / dot_to_person_ratio); //all of them is like waaaaay too much
+            var count = Math.round((disp.Count) / dot_to_person_ratio);
             var j = 0;
             while (j++ < count) {
                 var new_line = {id: i, 'Disposition': disp.Disposition, 'Type': disp.Type, 'Position': disp.Position};
@@ -205,28 +355,34 @@ function marijuana_chart() {
     
     var active_step = 'step0';
     function fill(d) {
-        var default_color = '#7B9984';
+        var default_color = '#8bc34a';
         if (active_step == 'step0') {
             return default_color;
         }
         else if (active_step == 'step1') {
             colors = {
-               'Convicted': '#7F3ECC',
-               'Other': '#7B9984',
-               'default': '#3C9455'
+               'Convicted': '#68C3FF',
+               'Other': '#AAA'
             };
-            return try_get(colors, d.Type, colors.default);
+            return try_get(colors, d.Type, default_color);
+        }
+        else if (active_step != 'step7') {
+            colors = {
+                'Convicted': '#68C3FF'
+            }
+            return try_get(colors, d.Type, default_color)
         }
         else {
             colors = {
-                'Prison': '#7F3ECC',
-                'Jail': '#7F3ECC',
-                'Probation': '#E7A7FF',
-                'Fine': '#64A34C',
-                'Discharged': '#3C9455',
-                'Sentence Pending': '#7B9984',
-                'Other': '#7B9984',
-                'Dismissed': '#3C9455'
+                // 'Prison': '#024687',
+                'Jail and prison': '#0065ae',
+                'Probation': '#738ffe',
+                'Fine': '#afbfff',
+                'Discharged': '#d0d9ff',
+                'Sentence Pending': '#68C3FF',
+                'Other': '#AAA',
+                'Covered by<br> another case': '#AAA',
+                'Dismissed': '#8bc34a'
             };
             return try_get(colors, d.Position, colors.default);
         }
@@ -236,10 +392,12 @@ function marijuana_chart() {
     function filter_data(data) {
         var filtered = data;
         step_filters = {
-            'step2': ['Jail', 'Prison', 'Probation', 'Sentence Pending', 'Discharged', 'Fine'],
-            'step3': ['Jail', 'Prison', 'Probation', 'Sentence Pending', 'Discharged'],
-            'step4': ['Jail', 'Prison', 'Probation', 'Sentence Pending'],
-            'step5': ['Jail', 'Prison']
+            'step2': ['Jail and prison', 'Probation', 'Other', 'Sentence Pending', 'Discharged', 'Fine'],
+            'step3': ['Jail and prison', 'Probation', 'Other', 'Sentence Pending', 'Discharged'],
+            'step4': ['Jail and prison', 'Probation', 'Other', 'Sentence Pending'],
+            'step4': ['Jail and prison', 'Probation', 'Other', 'Sentence Pending'],
+            'step5': ['Jail and prison', 'Other', 'Sentence Pending'],
+            'step6': ['Jail and prison']
         };
         
         if (_(step_filters).has(active_step)) {
@@ -265,6 +423,13 @@ function marijuana_chart() {
         circle = svg.selectAll('.dot')
             .data(data, function(d) {return d.id;});
         
+        //clean up old values
+        circle
+            .style('filter', 'none');
+
+
+
+
         //store the center, again superfluous
         center = foci.All;
         
@@ -295,7 +460,14 @@ function marijuana_chart() {
             .size([width, height])
             .theta(1) //not sure what this does but makes render less slow so ¯\_(ツ)_/¯
             .on('tick', tick);    
-        force.start();
+        force.start();    
+        //kind of liked the final layout, but yeah
+        // if (active_step === 'step6') {
+        //     setTimeout(function() {
+        //         force.stop();
+        //     }, 100)
+        // }
+        
         //enter circles
         circle.enter()
             .append('circle')
@@ -308,23 +480,22 @@ function marijuana_chart() {
                 var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
                 return (Math.random() * (height / 2) * plusOrMinus * 10);
             })
+            .attr('opacity', 1)
             .attr('r', radius)
             .style('fill', fill);
         // update. Transition the color change.
         circle
             .attr('opacity', 1)
             .attr('r', radius)
-            
             .transition()
-                .delay(75)
-                .duration(1000)
+                .duration(500)
                 .style('fill', fill);
         // exit
-
         circle.exit()
             .transition()
                 .duration(100)
-                .attr('opacity', .2)
+                .attr('r', radius)
+                .attr('opacity', .7)
                 .attr('stroke', '0px')
             .transition()
                 .duration(2000)
@@ -349,6 +520,22 @@ function marijuana_chart() {
                     return (Math.random() * height) - height;
                 })
             .remove();
+        
+        var labels = {'step0': [],
+        'step1': ['Jail', 'Prison', 'Probation', 'Sentence Pending', 'Discharged', 'Fine'],
+        'step2': ['Fine'],
+        'step3': ['Discharged'],
+        'step4': ['Probation'],
+        'step5': ['Sentence Pending', 'Other'],
+        'step6': ['Jail and prison'],
+        }
+        // var current = ;
+        highlight(labels[active_step])
+        // current.forEach(function(key) {
+        //     highlight(key);
+        // });
+
+
     } // draw_chart
     
     function switchStep(newStep) {
@@ -376,10 +563,13 @@ function marijuana_chart() {
             active_step = 'step' + (++step_no);
             if (step_no === 1) {
                 $('#previous').show();
-            } else if (step_no === 6) {
+            } else if (step_no === 7) {
+
                 $('#next').hide();
                 $('#startOver').show();
+                
                 enterLabels();
+                
                 labels_entered = true;
             }
             draw_chart(active_step);
@@ -408,7 +598,7 @@ function marijuana_chart() {
             }
             else if (step_no === 1) {
                 $('#startOver').hide();
-            } else if (step_no === 5) {
+            } else if (step_no === 6) {
                 $('#startOver').hide();
                 $('#next').show();
             }
