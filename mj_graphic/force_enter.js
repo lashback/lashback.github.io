@@ -25,6 +25,7 @@ function marijuana_chart(wrapper) {
         easing,
         ratio_weight,
         charge,
+        mobile_height_weight,
         graph_height;
     
     var svg = d3.select('#chart').append('svg')
@@ -39,26 +40,30 @@ function marijuana_chart(wrapper) {
         container = $(wrapper);
         container_width = container.width();
         width = container_width;
-        height = $(window).height()*0.9;
+
+        mobile_height_weight = .9;
         dot_to_person_ratio = 4;
         radius = 5;
         easing = 'quad';
         ratio_weight = 1;
         charge = -5;
-        graph_height = (height / 7) * 5;
+        
         svg.attr('width', width).attr('height', height);
         if (container_width < mobile_threshold) {
             radius = 2.5;
             charge = -1;
             graph_height = (height / 5) * 4;
             ratio_weight = 2;
+            mobile_height_weight = 1;
         }
         dot_to_person_ratio = dot_to_person_ratio * ratio_weight;
         
         if (!is_chrome && !is_IE) {
             dot_to_person_ratio = 8;
         }
-        
+
+        height = $(window).height()*mobile_height_weight;
+        graph_height = (height / 7) * 5;
         $(container).height(height);
     }
     calculate_user_settings();
