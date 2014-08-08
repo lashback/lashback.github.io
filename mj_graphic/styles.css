@@ -37,7 +37,7 @@
 .fxMarijuana #labels {
 	margin:0 auto;
 	text-align: center;
-	background-color: rgba(0,0,0, .8);
+	background-color: rgba(0,0,0, .4);
 
 }
 
@@ -219,7 +219,7 @@ h4{
 	width:100%;
 }
 
-@media (max-width:1000px) {
+@media (max-width:500px) {
 	.fxMarijuana .labels {
 		font-size: .5em;
 	}
@@ -229,6 +229,19 @@ h4{
 	.fxMarijuana .narrative span {
 		font-size: 1.4em;
 	}
+	.fxMarijuana table {
+		font-size: .5em;
+		max-width:30%;
+	}
+	.fxMarijuana h2 {
+		font-size: 1.2em;
+	}
+
+	.fxMarijuana #legend-row {
+		text-align: center;
+		/*position: relative;*/
+		background-color: rbga(255,255,255,.5); color:#ddd;
+}
 
 }
 
