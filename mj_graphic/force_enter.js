@@ -1,49 +1,46 @@
 /*jslint browser: true, sloppy: true, white: true*/
 // jquery's not on the page, so we're going to load this last...
 
-function marijuana_chart() {
-
+function marijuana_chart(wrapper) {
+    
+    /********
+     * Globals
+     ********/
+    
+    var data, circle, force, labels, keys;
     var mobile_threshold = 450;
-    var circle, force, labels, keys;
-
-    var margin = { top: 20, right: 20, bottom: 20, left: 20 },
-        chart = $('#chart_wrapper'),
-        container_width = $(window).width(),
-        width = container_width,
-        graphic_aspect_width = 16,
-        graphic_aspect_height = 7,
-        
-        columns = 3,
-        height = $(window).height(),
-        dot_to_person_ratio = 4,
-        radius = 5,
-        easing = 'quad',
-        ratio_weight = 1,
-        charge = -5;
-        graph_height = (height / 7) * 5;
-
-    if (container_width < mobile_threshold) {
-         radius = 2.5;
-         charge = -1;
-         graph_height = (height / 5) * 4;
-         ratio_weight = 2;
-
-    }
+    var active_step = 'step0';
+    
     var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
     var is_IE = navigator.userAgent.toLowerCase().indexOf('MSIE') > -1;
-    dot_to_person_ratio = dot_to_person_ratio * ratio_weight;
-    if (!is_chrome && !is_IE) {
-        dot_to_person_ratio = 8;
-    }    
+    
+    // these are set in calculate_user_settings
+    var margin = { top: 20, right: 20, bottom: 20, left: 20 },
+        container,
+        container_width,
+        width,
+        height,
+        dot_to_person_ratio,
+        radius,
+        easing,
+        ratio_weight,
+        charge,
+        graph_height;
+    
     var svg = d3.select('#chart').append('svg')
         .attr('width', width)
         .attr('height', height);
+    
+    /********
+     * Variables to update on resize
+     ********/
+    
     function calculate_user_settings() {
-        
-        container_width = $(window).width();
+        container = $(wrapper);
+        container_width = container.width();
         width = container_width;
-        height = $(window).height();
-        dot_to_person_ratio = 3;
+        height = $(window).height()*0.9;
+        dot_to_person_ratio = 4;
         radius = 5;
         easing = 'quad';
         ratio_weight = 1;
@@ -61,16 +58,21 @@ function marijuana_chart() {
         if (!is_chrome && !is_IE) {
             dot_to_person_ratio = 8;
         }
+        
+        $(container).height(height);
     }
-    d3.select('#legend-row')
-        .html("<p><span class='legend'>●</span> represents about " + dot_to_person_ratio + ' people</p><p class="source">Source: New York State Division of Criminal Justices Services (as of January 2014)</p>');
-    //we need an 'on resize function.' Got any good listeners? 
+    calculate_user_settings();
+    
+    /********
+     * Bring in the data
+     ********/
+    
     var dataset = [];
     var stats = [
         {
             "Disposition":"Prison",
             "Count":7,
-            "Type":"Convicted", 
+            "Type":"Convicted",
             'Position': 'Jail and prison'
         },
         {
@@ -169,6 +171,10 @@ function marijuana_chart() {
     var labels_entered = false;
     var format = d3.format(",");
     
+    d3.select('#legend-row')
+        .html("<p><span class='legend'>●</span> represents about " + dot_to_person_ratio + ' people</p>');
+
+    
     function fade(label) {
         circle.transition()
             .style("opacity", function(d) {
@@ -178,83 +184,26 @@ function marijuana_chart() {
     }
 
     function highlight(label) {
-        // var label_class_string = '.' + label;
-        // var span = d3.selectAll(label_class_string);
-        // console.log(span);
-        // span
-        //     .style('text-shadow', '-2px 2px 0 rgba(0, 0, 0, 0.29)');
-        
-        //while not pressed, repeat this guy.
-        // var defs = svg.append("defs");
-
-        // // create filter with id #drop-shadow
-        // // height=130% so that the shadow is not clipped
-        // var filter = defs.append("filter")
-        //     .attr('x', "-50%")
-        //     .attr('y', "-50%")
-        //     .attr("id", "drop-shadow")
-        //     .attr('width', "200%")
-        //     .attr("height", "200%");
-
-        // // SourceAlpha refers to opacity of graphic that this filter will be applied to
-        // // convolve that with a Gaussian with standard deviation 3 and store result
-        // // in blur
-        // filter.append("feGaussianBlur")
-        //     .attr("in", "SourceAlpha")
-        //     .attr("stdDeviation", 2)
-        //     .attr("result", "blur");
-
-        // // translate output of Gaussian blur to the right and downwards with 2px
-        // // store result in offsetBlur
-        // filter.append("feOffset")
-        //     .attr("result", "offsetBlur");
-
-        // // overlay original SourceGraphic over translated blurred opacity by using
-        // // feMerge filter. Order of specifying inputs is important!
-        // var feMerge = filter.append("feMerge");
-
-        // feMerge.append("feMergeNode")
-        //     .attr("in", "offsetBlur")
-        // feMerge.append("feMergeNode")
-        //     .attr("in", "SourceGraphic");
-        
         if (active_step !== 'step0' && active_step !== 'step1' && active_step !== 'step7') {
-            var opposite = circle.filter(function(d) { 
+            var opposite = circle.filter(function(d) {
                 var flag = true;
                 label.forEach(function(key) {
                     if (d.Position === key) {
-                       flag = false; 
+                       flag = false;
                     }
-                });            
+                });
                 return !flag;
             });
             opposite
-                // .style("filter", "url(#drop-shadow)")
                 .transition()
                     .delay(100)
                     .duration(1000)
                     .style('fill', '#0075c0');
-            // var primary = circle.filter(function(d) { return d.Position === label });
-            // primary
-            //     .transition()
-            //     .delay(200)
-            //         .duration(2000)
-            //         .style('fill', '#ffa000')
         }
-            
-          //.transition()
-           // .delay(1000)
-           // .duration(2000)
-               
-
-
-
-        //selection
                 
-        }
+    } // /highlight
     
     function enterLabels() {
-
         var processed_stats = _(stats).groupBy('Position');
         var out = _(processed_stats).map(function(g, key) {
             return {
@@ -264,10 +213,12 @@ function marijuana_chart() {
                 }, 0)
             };
         });
+        
         processed_stats = _.sortBy(out, function(num) { return -1*num.Count; });
         
         var first_half = processed_stats.slice(0,(processed_stats.length/2));
-        var second_half = processed_stats.slice((processed_stats.length/2),processed_stats.length);
+        var second_half = processed_stats.slice((processed_stats.length/2),
+            processed_stats.length);
         
         function makeit(data, id) {
             labels = d3.select(id).select('tbody').selectAll('tr')
@@ -293,7 +244,7 @@ function marijuana_chart() {
                     .transition()
                       .duration(2000)
                       .style("opacity", 1);
-                
+            
             if (container_width < mobile_threshold) {
                 var flipper = false;
                 labels.on('click', function(d){
@@ -320,7 +271,6 @@ function marijuana_chart() {
         }
     } // /enterLabels
 
-
     function make_data() {
         dataset = [];
         var i = 0;
@@ -335,7 +285,6 @@ function marijuana_chart() {
             }
         });
     }
-    
     
     function make_focii(data, step) {
         var foci = {};
@@ -353,7 +302,6 @@ function marijuana_chart() {
         if(els) return els;
     }
     
-    var active_step = 'step0';
     function fill(d) {
         var default_color = '#8bc34a';
         if (active_step == 'step0') {
@@ -369,8 +317,8 @@ function marijuana_chart() {
         else if (active_step != 'step7') {
             colors = {
                 'Convicted': '#68C3FF'
-            }
-            return try_get(colors, d.Type, default_color)
+            };
+            return try_get(colors, d.Type, default_color);
         }
         else {
             colors = {
@@ -395,7 +343,6 @@ function marijuana_chart() {
             'step2': ['Jail and prison', 'Probation', 'Other', 'Sentence Pending', 'Discharged', 'Fine'],
             'step3': ['Jail and prison', 'Probation', 'Other', 'Sentence Pending', 'Discharged'],
             'step4': ['Jail and prison', 'Probation', 'Other', 'Sentence Pending'],
-            'step4': ['Jail and prison', 'Probation', 'Other', 'Sentence Pending'],
             'step5': ['Jail and prison', 'Other', 'Sentence Pending'],
             'step6': ['Jail and prison']
         };
@@ -407,16 +354,21 @@ function marijuana_chart() {
         }
         return filtered;
     }
+    
     var data;
+    
     make_data();
+    
     function draw_chart(step) {
         svg
             .attr('width', width)
             .attr('height', height);
+        
         //get the right data for this step
         data = filter_data(dataset);
         
-        // this doesn't do much anymore because there's only one focus, but it's useful for the future
+        // this doesn't do much anymore because there's only one focus,
+        // but it's useful for the future
         var foci = make_focii(data, step);
         
         // bind the data to circle
@@ -427,30 +379,25 @@ function marijuana_chart() {
         circle
             .style('filter', 'none');
 
-
-
-
-        //store the center, again superfluous
+        // store the center. this would be useful if we had multiple foci.
         center = foci.All;
         
         //magichappens here.
         function tick(e) {
             //k tells us the strength of the tick, basically.
             var k = 0.09 * e.alpha;
-            // data.forEach(function(d) {
-            //     d.y += (center.y - d.y) * k;
-            //     d.x += (center.x - d.x) * k;
-            // });
+            
             circle
-                .attr('cx', function(d) { 
+                .attr('cx', function(d) {
                     d.x += (center.x - d.x) * k;
-                    return d.x; 
+                    return d.x;
                 })
-                .attr('cy', function(d) { 
+                .attr('cy', function(d) {
                     d.y += (center.y - d.y) * k;
-                    return d.y; 
+                    return d.y;
                 });
         }
+        
         //initialize the force layout
         force = d3.layout.force()
             .nodes(data)
@@ -458,14 +405,17 @@ function marijuana_chart() {
             .charge(charge) // repel
             .gravity(0)
             .size([width, height])
-            .theta(1) //not sure what this does but makes render less slow so ¯\_(ツ)_/¯
-            .on('tick', tick);    
-        force.start();    
-        //kind of liked the final layout, but yeah
-        // if (active_step === 'step6') {
+            .theta(1) // makes render less slow
+            .on('tick', tick);
+        force.start();
+        
+        // This freezes the dots half way through re-entering.
+        // It looks sort of cool but probably is too browser-specific.
+        
+        // if (active_step === 'step7') {
         //     setTimeout(function() {
         //         force.stop();
-        //     }, 100)
+        //     }, 100);
         // }
         
         //enter circles
@@ -495,7 +445,7 @@ function marijuana_chart() {
             .transition()
                 .duration(100)
                 .attr('r', radius)
-                .attr('opacity', .7)
+                .attr('opacity', 0.7)
                 .attr('stroke', '0px')
             .transition()
                 .duration(2000)
@@ -528,13 +478,9 @@ function marijuana_chart() {
         'step4': ['Probation'],
         'step5': ['Sentence Pending', 'Other'],
         'step6': ['Jail and prison'],
-        }
-        // var current = ;
-        highlight(labels[active_step])
-        // current.forEach(function(key) {
-        //     highlight(key);
-        // });
-
+        };
+        
+        highlight(labels[active_step]);
 
     } // draw_chart
     
@@ -553,6 +499,7 @@ function marijuana_chart() {
             .transition().delay(100).duration(300)
                 .style('opacity', 1);
     }
+    
     if (active_step === 'step0') {
         $('#previous').hide();
     }
@@ -564,7 +511,6 @@ function marijuana_chart() {
             if (step_no === 1) {
                 $('#previous').show();
             } else if (step_no === 7) {
-
                 $('#next').hide();
                 $('#startOver').show();
                 
@@ -589,7 +535,6 @@ function marijuana_chart() {
     d3.select('#previous')
         .on('click', function(e) {
             force.stop();
-            //this should just iterate through an array
             step_no = +active_step.charAt(4);
             active_step = 'step' + (--step_no);
             if (step_no === 0) {
@@ -605,18 +550,18 @@ function marijuana_chart() {
             draw_chart(active_step);
             switchStep(active_step);
             switchAnnotation(active_step);
-
-
         });
+    
     switchAnnotation(active_step);
     draw_chart(active_step);
 
-    //
-    // EVENT LISTENERS
-    //
+    /*****
+     * EVENT LISTENERS
+     *****/
+    
     $(window).on('resize', function() {
-        
+        force.stop();
         calculate_user_settings();
-        _.debounce(draw_chart(active_step), 100);
+        _.throttle(draw_chart(active_step), 100);
     });
 }

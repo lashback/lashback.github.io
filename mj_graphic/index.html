@@ -4,27 +4,26 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,100,100italic,700' rel='stylesheet' type='text/css'>
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
 	<link href="styles.css" rel="stylesheet">
 	<link href="css/font-awesome.css" rel="stylesheet">
 
 
 <script src = "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src = "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- <script src = "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
 
 	<title>Marijuana Disposition</title>
 	<style type="text/css">
 		body {
 			font-family: 'Roboto Condensed', sans-serif;
-			display: block;
-			margin-left: auto;
-			margin-right: auto;
+			background: #000;
 		}
 
 	</style>
 </head>
 <body>
-	<div class='container'>
+	<div class="container">
+	<div class='fxMarijuana'>
 		<div class='headline'>
 			<h1>More than half of 2013 LI marijuana cases dismissed</h1>
 			<hr>
@@ -32,15 +31,17 @@
 		
 		
 		<div class='row'>
-			<div class='button col-md-3 col-xs-6'>
-				<a id='previous' class='prev button'><span class="fa fa-angle-left"></span></a>	
-			</div>
+			<div class='button_container'>
+				<div class='button left-div col-md-3 col-xs-6'>
+					<a id='previous' class='prev button'><span class="fa fa-angle-left"></span></a>	
+				</div>
 
-			<div class='button col-md-3 col-md-push-6 col-xs-6'>
-					<a id='next' class='next button'><span class="fa fa-angle-right"></span></a>
-					<div id='start_wrap'>
-						<a id='startOver' class='button'><span class="fa fa-repeat"></span></a>
-					</div>
+				<div class='button right-div col-md-3 col-md-push-6 col-xs-6'>
+						<a id='next' class='next button'><span class="fa fa-angle-right"></span></a>
+						<div id='start_wrap'>
+							<a id='startOver' class='button'><span class="fa fa-repeat"></span></a>
+						</div>
+				</div>
 			</div>
 	
 			<div class='col-md-6 col-md-pull-3 col-xs-12'>
@@ -50,11 +51,8 @@
 							<h3>In 2013, <span class='all'>2,694 people</span> faced marijuana-related charges in Nassau and Suffolk counties.</h3>
 						</div>
 						<div class='annotation-step' id='step1-annotation'>
-							<h3>But last year, 57 percent of cases were <span class='legend'>dismissed</span> ultimately in court. 36 percent resulted in 
-							<span class='Convicted'>convictions.</span></h3>
-							<!-- <div class='footnote'>
-							 <p>*Another 6.7% had their charges <span class='Other'>covered in another case.</span></p>
-							</div> -->
+							<h3>But 57 percent of cases were <span class='Dismissed'>dismissed</span> in court. 36 percent resulted in <span class='Convicted'>convictions.</span></h3>
+							<p class='asterisk'>*Almost 7 percent of those people were charged with <span class='Other'>other crimes.</span></p></h3>
 						</div>
 
 						<div class='annotation-step' id='step2-annotation'>
@@ -103,10 +101,9 @@
 			<div id='chart'></div>
 		</div>
 		
-		<div class='row'>
-			<div id='legend-row'></div>
-		</div>
-		
+		<div id='legend-row'></div>
+		<div style="clear: both;"></div>
+	</div>
 	</div>
 
 
@@ -114,7 +111,7 @@
 <script src="d3.v3.min.js"></script>
 <script src="underscore.js"></script>
 <script src="force_enter.js"></script>
-<script>marijuana_chart();</script>
+<script>marijuana_chart(".fxMarijuana");</script>
 <script>
 
 </script>
