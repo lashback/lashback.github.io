@@ -1,0 +1,21 @@
+Problem: 
+	Google Fusion is the go-to data tool for web people at Newsday, but Fusion Tables fucking suck. 
+
+
+Tool to go:
+	Here is my region
+		How do we define region?
+			Counties
+			List of Zip Codes?
+
+	Here is my geographic level
+		County
+	Here is my desired projection
+		Equal area (most likely)
+		Equal distance
+
+	Here is my display
+	Here is my data (autojoin)
+	
+
+A lot of this would make sense involving PostGIS. 
