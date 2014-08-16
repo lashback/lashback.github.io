@@ -8,6 +8,9 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
+#container {
+  padding:15px;
+}
 .counties .active {
   fill: #fff200 !important;
 }
@@ -19,6 +22,10 @@ body {
   cursor:pointer;
 }
 
+#tooltip {
+  text-align: center;
+}
+
 #map {
   width:70%;
   margin:0 auto;
@@ -27,12 +34,14 @@ body {
 </style>
 </head>
 <body>
-<div id='tooltip'>
-  <p> </p>
-  <p> </p>
-</div>
+<div id='container'>
+  <h2>Suspicious Property Flips on Long Island</h2>
+  <div id='tooltip'>
+    <p> </p>
+    <p> </p>
+  </div>
 <div id='map'></div>
-
+</div>
 
 
 <script src="d3.v3.min.js"></script>
