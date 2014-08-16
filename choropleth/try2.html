@@ -1,7 +1,13 @@
 <!DOCTYPE html>
+<html>
 <meta charset="utf-8">
-<style>
+<head>
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,900,400italic' rel='stylesheet' type='text/css'>
 
+<style>
+body {
+  font-family: 'Roboto', sans-serif;
+}
 .counties .active {
   fill: #fff200 !important;
 }
@@ -13,17 +19,30 @@
   cursor:pointer;
 }
 
+#map {
+  width:70%;
+  margin:0 auto;
+}
+
 </style>
+</head>
 <body>
-<div id='tooltip'></div>
+<div id='tooltip'>
+  <p> </p>
+  <p> </p>
+</div>
+<div id='map'></div>
+
+
 
 <script src="d3.v3.min.js"></script>
 <script src="queue.v1.min.js"></script>
 <script src="topojson.v1.min.js"></script>
+<script src='jquery-2.1.1.js'></script>
 <script>
 
-var width = 960,
-    height = 500,
+var width = $("#map").width(),
+    height = 700,
     centered;
 
 
@@ -45,7 +64,7 @@ var projection = d3.geo.mercator()
 //     .range(["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f", "#b30000", "#7f0000"]);
 
 var color = d3.scale.log()
-    .range(["hsl(62,100%,90%)", "hsl(228,30%,20%)"])
+    .range(["hsl(60, 100%, 85%)", "hsl(348, 100%,37%)"])
     .interpolate(d3.interpolateHcl);
 
 // var color = d3.scale.threshold()
@@ -55,7 +74,7 @@ var color = d3.scale.log()
 
 var path = d3.geo.path().projection(projection);
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#map").append("svg")
     .attr("width", width)
     .attr("height", height);
 var g = svg.append("g");
@@ -93,7 +112,6 @@ d3.json('li_zip.json', function(error, us) {
     .sort(function(a,b) {return a-b});  
   
   color.domain([d3.min(frequencies), d3.max(frequencies)]);
-
 
   g.append("g")
       .attr("class", "counties")
