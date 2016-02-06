@@ -71,6 +71,7 @@ a {
 	text-align: center;
 }
 
+
 .header {
 	text-align: center;
 	font-size: 1.5em;
@@ -92,11 +93,11 @@ hr {
     border-top: 1px solid #eee;
 
 }
-.top {
+/*.top {
 	margin-top: 50px;
 	margin-bottom: -10px;
 }
-
+*/
 .right{
 	text-align: right;
 }
@@ -119,6 +120,12 @@ hr {
 }
 @media (max-width: 560px) {
 	.about {
+	}
+	.top .subtitle {
+		display:none;
+	}
+	.top {
+		text-align: center;
 	}
 	.about .hed {
 		/*float:none;*/
