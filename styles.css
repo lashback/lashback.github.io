@@ -1,13 +1,27 @@
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700|Merriweather:400,300,400italic,700|Open+Sans:300);
 
+* {
+	box-sizing: border-box;
+}
 body {
-
+	font-family: 'Merriweather';
+	color: #333;
+	font-size: 16px;
+    line-height: 1.5;
+    font-weight: 300;
 }
 h1, h2, h3, h4 {
 	font-family: 'Montserrat';
 	color:#333;
-	text-align: center;
+	
 	font-weight: 700;
+}
+
+span.name {
+	font-family: 'Montserrat';
+    color: #333;
+    font-weight: 700;
+    font-size: 2em;
 }
 p {
 	font-family: 'Merriweather';
@@ -16,20 +30,39 @@ p {
 a {
 	font-family: 'Montserrat';
 	font-weight: 700;
-	
+    color: #428bca;
+    text-decoration: none;
+}
+ a:hover {
+ 	text-decoration: underline;
+ }
+
+.about {
+	/*display: inline-block;*/
+}
+.about .hed {
+	width: 40%;
+	padding-right: 15px;
+	/*float: left;*/
+	vertical-align: top;
+	display: inline-block;
+}
+.about .content {
+	width: 50%;
+	padding-left: 10px;
+	display: inline-block;
 }
 
-
-.me {
-width: 100px;
-height: 100px;
--webkit-border-radius: 100%;
--moz-border-radius: 100%;
-border-radius: 100%;
-box-shadow: 5px 5px 5px -1px #ccc; 
-display:block;
-margin:auto;
-margin-bottom: 10px;
+.hed .me {
+	width: 150px;
+	/*height: 150px;*/
+	/*-webkit-border-radius: 100%;
+	-moz-border-radius: 100%;*/
+	border-radius: 50%;
+	box-shadow: -3px 3px 3px -2px #ccc; 
+	display:block;
+	margin:auto;
+	margin-bottom: 10px;
 }
 .subtitle {
 	letter-spacing: 1px;
@@ -53,7 +86,10 @@ margin-bottom: 10px;
 */
 
 hr {
-	border-color: #ccc;
+	    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
 
 }
 .top {
@@ -75,49 +111,59 @@ hr {
 }
 
 @media (min-width: 768px){
-.about{
-	
-	margin-left:30%;
-	margin-right:30%;
+	.about{
+		
+		margin-left:15%;
+		margin-right:15%;
+	}
 }
+@media (max-width: 560px) {
+	.about {
+	}
+	.about .hed {
+		/*float:none;*/
+		width: 100%;
+		margin: 0 auto;
+	}
+	.about .content {
+		width: 100%;
+	}
 }
 
-.job {
+/*.job {
 	text-align: center;
-	/* */
-	box-shadow: 0px 0px 5px 1px #ccc; 
-	margin: 2em 0em;
-	
-	padding: 2em 1.3em; 
+	box-shadow: 0px 0px 1px 1px #ccc; 
+	margin: 1em 0em;
+	padding: 1em .5em; 
 	
 }
-
-.project {
-
-	
-	/* */
+*/
+/*.project {
 	box-shadow: 0px 0px 5px 1px #ccc; 
 	margin: 2em 0em;
 	
 	padding: .5em 1.3em; 
 	
 }
+*/
 
-.title {
+
+.job .place {
 	font-family: 'Montserrat';
 	font-size: 1.6em;
+	font-weight: 700;
+	color:#666;
+	margin-bottom: 10px;
+}
+.job .title {
+	margin-top: 10px; 
+	font-family: 'Montserrat';
+	font-size: 1em;
 	font-weight: 700;
 }
 
 .description{
 	text-align: left;
-}
-@media (min-width: 768px){
-.description{
-	text-align:left;
-	margin-left:20%;
-	margin-right:20%;
-}
 }
 
 .skill {
@@ -191,3 +237,99 @@ strong{
 .more_info{
 	display: none;
 }
+
+.post-list {
+  margin-left: 0;
+  list-style: none;
+  text-align: center; }
+  .post-list > li {
+
+    margin-bottom: 30px;
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
+    margin: 20px;
+    text-align: center; }
+    .post-list > li .image {
+      height: 180px;
+      width: 180px;
+      background-size: cover;
+      border: solid 1px #ddd;
+      background-position: center;
+      display: inline-block; }
+      .post-list > li .image.shadow {
+        box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.07); }
+      .post-list > li .image.border {
+        border: 1px solid #f0f0f0; }
+    .post-list > li .title {
+      font-size: 13px;
+      line-height: 1.3em;
+      text-align: center;
+      color: #000; }
+      .post-list > li .title span {
+        font-size: 11px;
+        color: #868482;
+        font-weight: 300; }
+        .post-list > li .title span {
+          color: #868482;
+          font-weight: 300;
+
+          white-space: nowrap; }
+        .post-list > li .title span.post-meta {
+          white-space: nowrap; }
+@media screen and (max-width: 400px) {
+  .post-list > li {
+    width: 100%;
+    margin: 20px 0 40px; }
+    .post-list > li .image {
+      height: 280px;
+      width: 280px;
+      background-size: cover;
+      background-position: center;
+      display: inline-block; }
+    .post-list > li .title {
+      font-size: 16px; }
+      .post-list > li .title .post-meta {
+        font-size: 14px; }
+
+  .social-media-list li {
+    display: block; } }
+
+.post-title {
+  font-size: 42px;
+  letter-spacing: -1px;
+  margin: 30px;
+  margin-bottom: 60px;
+  line-height: 1;
+  font-weight: 100;
+  text-align: center; }
+  .post-title span {
+    color: #b8b7b6; }
+  .post-title {
+    font-weight: 100 !important;
+    color: #b8b7b6; }
+  @media screen and (max-width: 800px) {
+    .post-title {
+      font-size: 36px; } }
+
+.post-content {
+  margin-bottom: 30px; }
+  .post-content h2 {
+    font-size: 32px; }
+    .post-content h2 a {
+      font-weight: 300; }
+      .post-content h2 a:hover {
+        text-decoration: none; }
+    @media screen and (max-width: 800px) {
+      .post-content h2 {
+        font-size: 28px; } }
+  .post-content h3 {
+    font-size: 26px; }
+    @media screen and (max-width: 800px) {
+      .post-content h3 {
+        font-size: 22px; } }
+  .post-content h4 {
+    font-size: 20px; }
+    @media screen and (max-width: 800px) {
+      .post-content h4 {
+        font-size: 18px; } }
