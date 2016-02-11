@@ -72,6 +72,7 @@ a {
 }
 
 
+
 .header {
 	text-align: center;
 	font-size: 1.5em;
@@ -85,6 +86,10 @@ a {
 }
 
 */
+
+.education {
+	text-align:center;
+}
 
 hr {
 	    margin-top: 20px;
@@ -195,6 +200,11 @@ hr {
 
 	text-align: center;
 	font-size: 1.3em;
+	/*display: inline-block;*/
+}
+
+.buttons a {
+	margin: 20px;
 }
 strong{
 
