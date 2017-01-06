@@ -68,9 +68,18 @@ a {
 	letter-spacing: 1px;
 	font-family:'Open Sans', sans-serif;
 	color:#555;
-	text-align: center;
+	/*text-align: center;*/
 }
 
+div.award{
+	margin-top: 20px;
+}
+.award .subtitle {
+	margin-top: 0px;
+}
+.award .title {
+	margin: 0px;
+}
 
 
 .header {
@@ -129,6 +138,9 @@ hr {
 	.top .subtitle {
 		display:none;
 	}
+	.desktop {
+		display: none;
+	}
 	.top {
 		text-align: center;
 	}
@@ -173,6 +185,7 @@ hr {
 	font-size: 1em;
 	font-weight: 700;
 }
+
 
 .description{
 	text-align: left;
