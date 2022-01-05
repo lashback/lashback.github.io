@@ -20,12 +20,12 @@
 
 
 <body>
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<!--     
+
+<!--
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
  -->    <div class='container'>
-        <!--<img src='me.jpeg'> 
+        <!--<img src='me.jpeg'>
         -->
         <!-- <h4 style='font-weight:400' class='top'>stuff and thi </h4> -->
 
@@ -44,31 +44,31 @@
         <hr>
         <div class='about'>
                 <div class='hed'>
-                    <img class='me' src='hed3.jpg'/>
+                    <img class='me' src='hed4.jpg'/>
                 </div>
                 <div class='content'>
-                    <p>My name is <strong>Nathaniel Lash</strong> and I'm a graphics reporter for the <a href='https://www.nytimes.com/section/opinion' target='_blank'>New York Times Opinion section.</a></p>
-                    <p>Shoot me an email at <a href="mailto:nathaniel.lash@gmail.com">nathaniel.lash@nytimes.com</a>. Follow me <a href='https://twitter.com/Nat_Lash' target='_blank'>@Nat_Lash</a>.</p>
+                    <p>My name is <strong>Nathaniel Lash</strong> and I'm a graphics reporter for <a href='https://www.nytimes.com/by/nathaniel-lash' target='_blank'>New York Times Opinion.</a></p>
+                    <p>Shoot me an email at <a href="mailto:nathaniel.lash@nytimes.com">nathaniel.lash@nytimes.com</a>. Follow me <a href='https://twitter.com/Nat_Lash' target='_blank'>@Nat_Lash</a>.</p>
                 </div>
         </div>
-        
+
 
 
 
 <script>
     $(document).ready(function () {
     $(document).on("scroll", onScroll);
-            
+
             //smoothscroll
             $('a[href^="#"]').on('click', function (e) {
                 e.preventDefault();
                 $(document).off("scroll");
-                
+
                 $('a').each(function () {
                     $(this).removeClass('active');
                 })
                 $(this).addClass('active');
-              
+
                 var target = this.hash,
                     menu = target;
                 $target = $(target);
@@ -96,17 +96,17 @@
         });
     }$(document).ready(function () {
         $(document).on("scroll", onScroll);
-        
+
         //smoothscroll
         $('a[href^="#"]').on('click', function (e) {
             e.preventDefault();
             $(document).off("scroll");
-            
+
             $('a').each(function () {
                 $(this).removeClass('active');
             })
             $(this).addClass('active');
-          
+
             var target = this.hash,
                 menu = target;
             $target = $(target);

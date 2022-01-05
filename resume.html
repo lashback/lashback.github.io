@@ -20,12 +20,12 @@
 
 
 <body>
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<!--     
+    
+<!--
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
  -->    <div class='container'>
-        <!--<img src='me.jpeg'> 
+        <!--<img src='me.jpeg'>
         -->
         <!-- <h4 style='font-weight:400' class='top'>stuff and thi </h4> -->
 
@@ -43,41 +43,45 @@
         </div>
         <hr>
         <div class='row about' id='resume'>
-        <!-- <p><em><a href='/print.pdf' target='_blank'>(print version)</a></em></p> -->
-        
+
         <div id='experience' name='experience'>
-            <!--How am I going to make this more taxonomical? Maybe add edge instead.-->
-		 <div class='job'>
-                    <h4 class='place'>Philadelphia Inquirer</h4>
-                    <span class='title'>Reporter, Investigations</span> | <span class='subtitle'>June 2018 - present </span>
+                <div class='job'>
+                    <h4 class='place'>New York Times Opinion</h4>
+                    <span class='title'>Graphics reporter</span> | <span class='subtitle'>March 2020 - present</span>
                     <br>
-                    <span class='description'>I'm a reporter on the Investigations team using data to better understand how government agencies and the powerful operate.</span>
+                    <span class='description'>Reporting and visual storytelling for Times Opinion's graphics team.</span>
+                </div>
+		            <div class='job'>
+                    <h4 class='place'>Philadelphia Inquirer</h4>
+                    <span class='title'>Reporter, Investigations</span> | <span class='subtitle'>June 2018 - March 2020 </span>
+                    <br>
+                    <span class='description'>Investigative reporting on Philadelphia's child welfare and criminal legal systems, as well as the region's opioid crisis.</span>
                 </div>
                 <div class='job'>
                     <h4 class='place'>Tampa Bay Times</h4>
                     <span class='title'>Data Reporter</span> | <span class='subtitle'>Jan. 2015 - June 2018 </span>
                     <br>
-                    <span class='description'>I wrote code to report stories and visualize data.</span>
+                    <span class='description'>Wrote code to report stories and visualize data.</span>
                 </div>
 
                 <div class='job'>
                     <h4 class='place'>Wall Street Journal</h4>
                     <span class='title'>News Applications Developer</span> | <span class='subtitle'>Oct. 2014-Jan. 2015</span>
                     <br>
-                    <span class='description'>Working as a developer with the Interactive Graphics team, I built graphics and digital projects for the newspaper's World desk.</span>
+                    <span class='description'>Built graphics and digital projects for WSJ's World desk.</span>
                 </div>
                 <div class='job'>
                     <h4 class='place'>Newsday</h4>
                     <span class='title'>Investigative Team Intern</span> | <span class='subtitle'>Summer 2014</span>
-                    <br>                    
-                    <span class='description'>In between wrangling piles of public records, I built interactive graphics for departments across the Newsday newsroom.</span>
+                    <br>
+                    <span class='description'>Acquired and analyzed data for long-term investigative projects. Built interactive graphics for departments across the Newsday newsroom.</span>
                 </div>
 
                 <div class='job'>
                     <h4 class='place'>Center for Investigative Reporting</h4>
                     <span class='title'>Google Journalism Fellow</span> | <span class='subtitle'>Summer 2013</span>
                     <br>
-                    <span class='description'>I came in a novice coder and came out a less novice coder thanks to patient teaching of CIR news apps dev <a href='http://cironline.org/person/michael-corey' target="_blank">Michael Corey</a>. There I learned the ropes of Djangoing and helping reporters make use of structured data.</span>
+                    <span class='description'>Developing Django apps dashboards for investigative reporting.</span>
                 </div>
 
                 <div class='job'>
@@ -86,7 +90,7 @@
                     <span class='title'>News Apps Developer</span> | <span class='subtitle'>March 2013 to May 2014</span>
                     <br>
                     <span class='title'>Managing Editor for Reporting</span> | <span class='subtitle'>March 2012 to March 2013</span>
-                    
+
                     <br>
                     <span class='title'>Design Editor</span> | <span class='subtitle'>Summer 2011</span>
                     <br>
@@ -101,15 +105,15 @@
 		<div class='education'>
 			<hr class='divider'>
 			<h2>Education</h2>
-			
+
 			<div class='school'>
 
 			<p class='title'>University of Illinois at Urbana-Champaign</p>
 			<p class='subtitle'>Bachelor of Science | News-Editorial Journalism | May 2014</p>
-			
+
 <!-- 			<h4>Relevant coursework:</h4>
 			<p class='description'><a href='https://wiki.engr.illinois.edu/display/cs125/Home' target='_blank'>Introduction to Programming</a></p>
-			<p class='description'>Introduction to GIS</p>			
+			<p class='description'>Introduction to GIS</p>
 			<p class='description'><a href='http://www.stat.illinois.edu/courses/stat200/' target='_blank'>Data Analysis</a></p>
 
 			<p class='description'>Investigative Reporting</p>
@@ -127,7 +131,7 @@
 		<div class='awards'>
 			<hr class='divider'>
 			<h2>Awards and Honors</h2>
-            
+
             <div class='award'>
             <p class='title'><a href='http://www.prnewswire.com/news-releases/ucla-anderson-school-of-management-announces-2017-gerald-loeb-award-winners-300480932.html/'>Gerald Loeb Award, Investigative</a></p>
             </div>
@@ -171,17 +175,17 @@
 <script>
     $(document).ready(function () {
     $(document).on("scroll", onScroll);
-            
+
             //smoothscroll
             $('a[href^="#"]').on('click', function (e) {
                 e.preventDefault();
                 $(document).off("scroll");
-                
+
                 $('a').each(function () {
                     $(this).removeClass('active');
                 })
                 $(this).addClass('active');
-              
+
                 var target = this.hash,
                     menu = target;
                 $target = $(target);
@@ -209,17 +213,17 @@
         });
     }$(document).ready(function () {
         $(document).on("scroll", onScroll);
-        
+
         //smoothscroll
         $('a[href^="#"]').on('click', function (e) {
             e.preventDefault();
             $(document).off("scroll");
-            
+
             $('a').each(function () {
                 $(this).removeClass('active');
             })
             $(this).addClass('active');
-          
+
             var target = this.hash,
                 menu = target;
             $target = $(target);
