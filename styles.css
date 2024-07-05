@@ -58,6 +58,7 @@ a {
 	width: 50%;
 	padding-left: 10px;
 	display: inline-block;
+	vertical-align: middle;
 }
 
 .hed .me {
@@ -132,6 +133,9 @@ hr {
 
 }
 
+.about {
+	padding-top:1em;
+}
 @media (min-width: 768px){
 	.about{
 		

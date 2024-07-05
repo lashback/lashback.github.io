@@ -4,126 +4,23 @@
 <head>
     <title>Nathaniel Lash</title>
 
-    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
+
     <link rel='stylesheet' href='styles.css'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-48511546-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-48511546-1');
-</script>
 
 
 <body>
+    <div class='container'>
 
-<!--
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
- -->    <div class='container'>
-        <!--<img src='me.jpeg'>
-        -->
-        <!-- <h4 style='font-weight:400' class='top'>stuff and thi </h4> -->
-
-        <p class='top'><span class='name'>NATHANIEL LASH</span></p>
-        <!-- <hr class='divider'> -->
-        <!-- <h2>About me</h2>
-        <hr class='divider'>
-         -->
-        <!-- <div class='nav'></div> -->
-        <hr>
-        <div class='buttons'>
-            <a href='#'><span class='check'>About</span></a>
-            <a href='/projects.html'>Work</a>
-            <a href='/resume.html'>Resume</a>
-        </div>
-        <hr>
         <div class='about'>
-                <div class='hed'>
-                    <img class='me' src='hed4.jpg'/>
-                </div>
+                
                 <div class='content'>
-                    <p>My name is <strong>Nat Lash</strong> and I'm a news applications developer at ProPublica.</p>
+                    <p>My name is <strong>Nat Lash</strong> and I'm a <a href='https://www.propublica.org/people/nat-lash'>news applications developer at ProPublica.</a></p>
+                    <p>See some of my previous work at the <a href='https://www.nytimes.com/by/nathaniel-lash'>New York Times</a>, <a href='https://www.inquirer.com/author/lash_nathaniel/'>Philadelphia Inquirer</a> and <a href='https://www.tampabay.com/author/nlash/'>Tampa Bay Times</a>.</p>
                     <p>Shoot me an email at <a href="mailto:nat.lash@propublica.org">nat.lash@propublica.org</a>.</p>
                 </div>
         </div>
-
-
-
-
-<script>
-    $(document).ready(function () {
-    $(document).on("scroll", onScroll);
-
-            //smoothscroll
-            $('a[href^="#"]').on('click', function (e) {
-                e.preventDefault();
-                $(document).off("scroll");
-
-                $('a').each(function () {
-                    $(this).removeClass('active');
-                })
-                $(this).addClass('active');
-
-                var target = this.hash,
-                    menu = target;
-                $target = $(target);
-                $('html, body').stop().animate({
-                    'scrollTop': $target.offset().top+2
-                }, 500, 'swing', function () {
-                    window.location.hash = target;
-                    $(document).on("scroll", onScroll);
-                });
-            });
-        });
-
-    function onScroll(event){
-        var scrollPos = $(document).scrollTop();
-        $('#menu-center a').each(function () {
-            var currLink = $(this);
-            var refElement = $(currLink.attr("href"));
-            if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
-                $('#menu-center ul li a').removeClass("active");
-                currLink.addClass("active");
-            }
-            else{
-                currLink.removeClass("active");
-            }
-        });
-    }$(document).ready(function () {
-        $(document).on("scroll", onScroll);
-
-        //smoothscroll
-        $('a[href^="#"]').on('click', function (e) {
-            e.preventDefault();
-            $(document).off("scroll");
-
-            $('a').each(function () {
-                $(this).removeClass('active');
-            })
-            $(this).addClass('active');
-
-            var target = this.hash,
-                menu = target;
-            $target = $(target);
-            $('html, body').stop().animate({
-                'scrollTop': $target.offset().top+2
-            }, 500, 'swing', function () {
-                window.location.hash = target;
-                $(document).on("scroll", onScroll);
-            });
-        });
-    });
-
-
-    $('.more').click(function(){
-            $(this).next('div.more_info').slideToggle('slow');
-        });
-    </script>
 
 
     </body>
