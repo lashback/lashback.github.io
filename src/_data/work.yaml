@@ -1,18 +1,18 @@
 - headline: What ProPublica Found in the Genetic Code of America’s Measles Outbreaks
   url: "https://projects.propublica.org/measles-outbreak-analysis-utah-texas/"
-  dek: 2026 - Analyzed measles virus genomic sequences to identify a trail of breadcrumbs, also  as an interactive graphic.
+  dek: Analyzed measles virus genomic sequences to identify a trail of breadcrumbs to trace the outbreak's spread, also presented as an interactive graphic.
   image: /static/images/measles.png
   external: true
 
 - headline: What the U.S. Government Is Dismissing That Could Seed a Bird Flu Pandemic
   url: "https://www.propublica.org/article/bird-flu-airborne-usda-pandemic"
-  dek: 2025 - Investigation into how bird flu spread as egg prices spiked, and what the federal government is failing to do to stop it.
+  dek: Investigation into how bird flu spread as egg prices spiked, and what the federal government failed to do to stop it.
   image: /static/images/bird-flu.png
   external: true
 
 - headline: How ProPublica Investigated a Bird Flu Outbreak in America’s Heartland
   url: "https://www.propublica.org/article/methodology-bird-flu-outbreak-ohio-indiana"
-  dek: 2025 - Details the bird flu investigation's methodology of phylogenetic analysis, dust dispersion models, and efforts to identify which poultry farms in the region weren't infected.
+  dek: Details the bird flu investigation's methodology of phylogenetic analysis, dust dispersion models, and efforts to identify which poultry farms in the region weren't infected.
   image: /static/images/bird-flu-redact.png
   external: true
 
@@ -24,13 +24,13 @@
 
 - headline: 527 Explorer 
   url: "https://projects.propublica.org/527-explorer/"
-  dek: Project that standardized records of a special type of political fundraising organization and made it searchable.
+  dek: Project that standardized records of a special type of political fundraising organization and made them searchable.
   image: /static/images/527s.png
   external: true
 
 - headline: The 20 Farming Families Who Use More Water From the Colorado River Than Some Western States
   url: "https://projects.propublica.org/california-farmers-colorado-river/"
-  dek: Modeled irrigation water use down to the field-level in one of the thirstiest region in the country.
+  dek: Modeled irrigation water use down to the field-level in one of the thirstiest regions in the country.
   image: /static/images/hay.png
   external: true
 
@@ -42,7 +42,7 @@
 
 - headline: This 500-Year-Old Tree in California Has a Story to Tell
   url: "https://www.nytimes.com/interactive/2022/07/20/opinion/ancient-trees-climate-change.html?unlocked_article_code=1.5lA.qOVY.kOKZ7HwRwC-8&smid=url-share"
-  dek: Worked with dendrochronologist to chronicle California's droughts via high-resolution imagery of tree rings.
+  dek: Worked with a dendrochronologist to chronicle the Western United State's droughts via high-resolution imagery of tree rings.
   image: /static/images/tree-rings.png
   external: true
 
@@ -54,13 +54,13 @@
 
 - headline: Will We Struggle to Reach Herd Immunity?
   url: "https://www.nytimes.com/interactive/2021/03/26/opinion/vaccine-hesitancy-deserts-oases.html?unlocked_article_code=1.51A.Q5FS.g0576Gu5Qp-q&smid=url-share"
-  dek: Charticle on the first signs of difficulty of rolling out the vaccines against COVID-19.
+  dek: Charticle on the first signs of difficulty in rolling out the vaccines against COVID-19.
   image: /static/images/scatter-vax.png
   external: true
 
 - headline: Failure Factories
   url: "https://projects.tampabay.com/projects/2015/investigations/pinellas-failure-factories/chart-failing-black-students/"
-  dek: Launched a Pulitzer Prize-winning investigation with an interactive graphic showing how a Florida school district had failed its black students.
+  dek: Launched a Pulitzer Prize-winning investigation with an interactive graphic showing how a Florida school district had failed its Black students.
   image: /static/images/failure-factories.png
   external: true
 
