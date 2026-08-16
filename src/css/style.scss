@@ -1,0 +1,189 @@
+// ---- variables -------------------------------------------------
+$bg:      #ececea;   // light grey background
+$surface: #f7f7f4;   // card face
+$ink:     #1b1d1a;   // near-black
+$dek:     #75746d;   // lower-contrast grey
+$accent:  #1b4332;   // dark forest green 
+$line:    #d7d6cf;   // hairline dividers
+
+$font-display: "Archivo Black", system-ui, -apple-system, sans-serif;
+$font-text:    "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+
+$maxw: 1180px;
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: $bg;
+  color: $ink;
+  font-family: $font-text;
+  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.12rem);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.wrap {
+  max-width: $maxw;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 3rem);
+}
+
+.bighead {          
+  font-family: $font-display;
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.smallhead {        
+  font-family: $font-text;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.dek {
+  color: $dek;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.intro { padding: clamp(3.5rem, 10vw, 7rem) 0 clamp(2.5rem, 6vw, 4rem); }
+
+.name {
+  margin: 0;
+  font-size: clamp(2.9rem, 9vw, 6rem);
+  color: $accent;           
+}
+
+.bio {
+  max-width: 46ch;
+  margin: 1.5rem 0 0;
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
+}
+
+.anchors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  margin-top: 2.5rem;
+}
+
+.anchors a {
+  font-size: 1rem;
+  color: $ink;
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: color .15s ease, border-color .15s ease;
+
+  &:hover,
+  &:focus-visible { color: $accent; border-color: $accent; }
+}
+
+.section {
+  // padding: clamp(2.5rem, 6vw, 4.5rem) 0;
+  // border-top: 1px solid $line;
+  scroll-margin-top: 2rem;
+}
+
+.section-head {
+  margin: 0 0 2rem;
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem);
+  color: $accent;         
+}
+
+
+.work-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.85rem 1.5rem;
+}
+
+.work-item { display: flex; flex-direction: column; }
+
+.card-media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 8px;
+  background: $surface;
+  border: 1px solid $line;
+
+  img { width: 100%; height: 100%; object-fit: cover; display: block; }
+}
+
+.cardhead {
+  margin: 0.9rem 0 0.35rem;
+  font-size: 1.02rem;
+  line-height: 1.3;
+
+  a {
+    color: $ink;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+
+    &:hover,
+    &:focus-visible { color: $accent; border-color: $accent; }
+    // &::after { content: " \2197"; color: $dek; font-weight: 400; }
+  }
+}
+
+
+.awards-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem 2rem;
+}
+
+.award {
+  padding-top: 0.9rem;
+  .dek { margin-top: 0.15rem; }
+}
+
+.award-name { display: block; font-weight: 600; }
+
+.resume-link {
+  display: inline-block;
+  font-size: clamp(1.3rem, 4vw + 1rem, 2.4rem);
+  color: $ink;
+  text-decoration: none;
+  transition: color .15s ease;
+
+  &:hover,
+  &:focus-visible { color: $accent; }
+  .arrow { color: $accent; }     
+}
+
+footer {
+  padding: 2.5rem 0 4rem;
+  border-top: 1px solid $line;
+  color: $dek;
+  font-size: 0.85rem;
+}
+
+:focus-visible {
+  outline: 2px solid $accent;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (max-width: 640px) {
+  .work-grid   { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1.1rem; }
+  .awards-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "nathaniel-lash-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Single-page portfolio, built with Eleventy, content driven by YAML.",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "js-yaml": "^4.1.0",
+    "sass": "^1.77.0"
+  }
+}

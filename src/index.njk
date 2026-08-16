@@ -1,0 +1,55 @@
+---
+layout: false
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ site.name }}</title>
+  <meta name="description" content="{{ site.bio }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Hanken+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="intro">
+      <h1 class="bighead name">{{ site.name }}</h1>
+      <p class="bio">{{ site.bio | safe }}</p>
+    </header>
+
+    <main>
+      <section id="work" class="section">
+        <h2 class="section-head smallhead">Highlighted Work</h2>
+        <ul class="work-grid">
+          {%- for item in work %}
+          <li class="work-item">
+            <a href="{{ item.url }}"{% if item.external %} target="_blank" rel="noopener"{% endif %}>
+              <div class="card-media">
+                <img src="{{ item.image }}" alt="{{ item.alt or item.headline }}"
+                     loading="lazy" width="600" height="450">
+              </div>
+              <h3 class="cardhead smallhead">
+                {{ item.headline  | safe }}</a>
+              </h3>
+            </a>
+            <p class="dek">{{ item.dek | safe }}</p>
+          </li>
+          {%- endfor %}
+        </ul>
+      </section>
+
+      <section id="resume" class="section">
+        <h4 class='smallhead'><a href="{{ site.resume }}">Résumé (pdf)</span></a></h4>
+      </section>
+    </main>
+
+    <footer>&copy; {% year %} {{ site.name }}</footer>
+
+  </div>
+</body>
+</html>

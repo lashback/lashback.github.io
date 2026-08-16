@@ -1,0 +1,23 @@
+- name: Award or honor name
+  org: Granting organization
+  year: 2025
+
+- name: Another award
+  org: Organization
+  year: 2024
+
+- name: A fellowship or grant
+  org: Program
+  year: 2024
+
+- name: Finalist / shortlist mention
+  org: Organization
+  year: 2023
+
+- name: Team recognition
+  org: Organization
+  year: 2023
+
+- name: Early-career honor
+  org: Organization
+  year: 2022
